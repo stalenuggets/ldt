@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LDT</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="Login">Login</string>
+</resources>
