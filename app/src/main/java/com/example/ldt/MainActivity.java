@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     //declare fields
     private Button mLoginButton;
-    private TextView mCreateAnAccount;
+    private Button mCreateAnAccount;
     private ActivityMainBinding mMainBinding;
 
     //onCreate method
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //inflate
+        //inflate layout
         mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = mMainBinding.getRoot();
 
