@@ -1,4 +1,4 @@
-package com.example.ldt;
+package com.example.ldt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,24 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
+import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityMainBinding;
-import com.example.ldt.ui.login.LoginActivity;
 
 /**
  * @author Erika Iwata
- * @since 4/6/23
- * Title: Project 2
+ * @since 4/6/23 <br>
+ * Title: Project 2 <br>
  * Description: Landing Page 1
  */
 
 public class MainActivity extends AppCompatActivity {
 
     //declare fields
-    private Button mLoginButton;
-    private Button mCreateAnAccount;
-    private ActivityMainBinding mMainBinding;
+    private Button mBtnLogin;
+    private Button mBtnCreateAcct;
 
     //onCreate method
     @Override
@@ -31,27 +29,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //inflate layout
-        mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = mMainBinding.getRoot();
-
         //set variables
-        mLoginButton = mMainBinding.loginButton;
-        mCreateAnAccount = mMainBinding.createAnAccount;
+        mBtnLogin = findViewById(R.id.btn_login);
+        mBtnCreateAcct = findViewById(R.id.btn_create_acct);
 
-        //click on login button
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
+        //click on - login button
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openLoginActivity();
             }
         });
 
-        //click on create an account
-        mCreateAnAccount.setOnClickListener(new View.OnClickListener() {
+        //click on - create an account button
+        mBtnCreateAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openLoginActivity();
+                openCreateAcctActivity();
             }
         });
 
@@ -60,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
     //openLoginActivity method
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    //openCreateAcctActivity method
+    public void openCreateAcctActivity() {
+        Intent intent = new Intent(this, CreateAcctActivity.class);
         startActivity(intent);
     }
 

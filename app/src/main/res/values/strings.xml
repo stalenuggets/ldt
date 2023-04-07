@@ -12,4 +12,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title">legally distinct tamagotchi</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
 </resources>

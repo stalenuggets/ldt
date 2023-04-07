@@ -1,82 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--Relative Layout Is Used-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".MainActivity">
+    android:background="@color/light_grey"
+    tools:context=".activities.MainActivity">
 
-    <!--Title-->
+    <!--Text View for Title-->
+
     <TextView
-        android:id="@+id/title"
-        android:text="@string/title"
-        android:textSize="50sp"
-        android:textColor="@color/black"
-        android:gravity="center"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/tama_font"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textSize="50sp" />
 
-    <!--App Icon-->
+    <!--Image View for Icon-->
+
     <ImageView
-        android:id="@+id/appIcon"
-        android:layout_width="217dp"
-        android:layout_height="201dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="324dp"
-        android:layout_marginEnd="76dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/iv_icon"
+        android:layout_width="190dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:layout_alignStart="@id/btn_create_acct"
+        android:layout_below="@id/tv_title"
+        android:gravity="center_horizontal"
         app:srcCompat="@drawable/icon" />
 
-    <!--Login Button-->
+    <!--Button for Login-->
+
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/btn_login"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_icon"
+        android:fontFamily="@font/tama_font"
         android:gravity="center"
         android:text="@string/Login"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        android:fontFamily="@font/tama_font"
-        app:layout_constraintBottom_toTopOf="@id/createAnAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appIcon" />
+        android:textSize="15sp" />
 
-    <!--Create an Account-->
+    <!--Button for Create an Account-->
+
     <Button
-        android:id="@+id/createAnAccount"
+        android:id="@+id/btn_create_acct"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginEnd="136dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_login"
+        android:fontFamily="@font/tama_font"
         android:gravity="center"
-        android:textAllCaps="false"
         android:text="@string/create_an_account"
         android:textColor="@color/black"
-        android:textSize="15sp"
-        android:fontFamily="@font/tama_font"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton"
-        app:layout_constraintVertical_bias="0.888" />
+        android:textSize="15sp" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
