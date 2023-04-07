@@ -4,9 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_dynamic_neutral_variant60"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
+    <!--Title-->
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/title"
+        android:textSize="50sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tama_font"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--App Icon-->
     <ImageView
         android:id="@+id/appIcon"
         android:layout_width="217dp"
@@ -20,78 +39,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon" />
 
+    <!--Login Button-->
     <Button
         android:id="@+id/loginButton"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="102dp"
-        android:layout_height="57dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
         android:layout_marginEnd="156dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="@string/Login"
         android:textAllCaps="true"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="15sp"
+        android:fontFamily="@font/tama_font"
+        app:layout_constraintBottom_toTopOf="@id/createAnAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/legallyTitle"
-        android:layout_width="255dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/legally" />
+        app:layout_constraintTop_toBottomOf="@id/appIcon" />
 
-    <ImageView
-        android:id="@+id/distinctTitle"
-        android:layout_width="255dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/distinct" />
-
-    <ImageView
-        android:id="@+id/tamagotchiTitle"
-        android:layout_width="299dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tamagotchi" />
-
-    <TextView
+    <!--Create an Account-->
+    <Button
         android:id="@+id/createAnAccount"
-        android:layout_width="151dp"
-        android:layout_height="37dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="680dp"
         android:layout_marginEnd="136dp"
-        android:layout_marginBottom="50dp"
         android:gravity="center"
+        android:textAllCaps="false"
         android:text="@string/create_an_account"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:fontFamily="@font/tama_font"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805"
-        android:clickable="true"/>
+        app:layout_constraintTop_toBottomOf="@id/loginButton"
+        app:layout_constraintVertical_bias="0.888" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
