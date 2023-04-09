@@ -15,4 +15,7 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="register">Register</string>
+    <string name="create_account">Create account</string>
+    <string name="sign_up">Sign up</string>
+    <string name="welcome_back">Welcome back</string>
 </resources>

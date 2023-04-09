@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityMainBinding;
 
 /**
@@ -20,29 +18,31 @@ import com.example.ldt.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     //declare fields
-    private Button mBtnLogin;
-    private Button mBtnCreateAcct;
+    private ActivityMainBinding mBinding;
 
-    //onCreate method
+    /**
+     * Tells program what to do when this activity is created
+     * @param savedInstanceState saved state of the application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //onCreate setup
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = mBinding.getRoot();
+        setContentView(view);
 
-        //set variables
-        mBtnLogin = findViewById(R.id.btn_login);
-        mBtnCreateAcct = findViewById(R.id.btn_create_acct);
-
-        //click on - login button
-        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+        //click - login button
+        mBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openLoginActivity();
             }
         });
 
-        //click on - create an account button
-        mBtnCreateAcct.setOnClickListener(new View.OnClickListener() {
+        //click - create an account button
+        mBinding.btnCreateAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openCreateAcctActivity();
@@ -51,13 +51,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //openLoginActivity method
+    /**
+     *  Open LoginActivity
+     */
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
-    //openCreateAcctActivity method
+    /**
+     *  Open CreateAcctActivity
+     */
     public void openCreateAcctActivity() {
         Intent intent = new Intent(this, CreateAcctActivity.class);
         startActivity(intent);

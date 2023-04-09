@@ -1,20 +1,12 @@
 package com.example.ldt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.ldt.R;
-import com.example.ldt.user.User;
-import com.example.ldt.user.UserDatabase;
 import com.example.ldt.databinding.ActivityLoginBinding;
-
-import java.util.List;
 
 /**
  * @author Erika Iwata
@@ -26,39 +18,37 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     //declare fields
-    private EditText mEtUsr;
-    private EditText mEtPwd;
-    private Button mBtnLogin;
+    private ActivityLoginBinding mBinding;
 
-    //onCreate method
+    /**
+     * Tells program what to do when this activity is created
+     * @param savedInstanceState saved state of the application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //onCreate setup
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        mBinding = ActivityLoginBinding.inflate(getLayoutInflater());
+        View view = mBinding.getRoot();
+        setContentView(view);
 
-        //set variables
-        mEtUsr = findViewById(R.id.et_usr);
-        mEtPwd = findViewById(R.id.et_pwd);
-        mBtnLogin = findViewById(R.id.btn_login);
-
-        //build user database
-        UserDatabase userDb = Room.databaseBuilder(getApplicationContext(), UserDatabase.class, "user-database").allowMainThreadQueries().build();
-
-        //insert predefined users
-        User testuser1 = new User("testuser1", "testuser1");
-        User admin2 = new User("admin2", "admin2", true);
-        userDb.userDao().insertAll(testuser1, admin2);
-
-        //check if predefined users are properly stored in database
-        List<User> userList = userDb.userDao().getAllUsers();
-        for (User user: userList) {
-            Log.d("users", user.usr + " " + user.pwd + " " + user.admin);
-        }
+        //click on - back button
+        mBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMainActivity();
+            }
+        });
 
     }
 
-    //validate username and password
-    private void validate(String username, String password) {
-
+    /**
+     * open MainActivity
+     */
+    public void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
+
 }

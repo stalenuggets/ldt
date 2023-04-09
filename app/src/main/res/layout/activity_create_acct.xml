@@ -10,19 +10,31 @@
     android:background="@color/light_grey"
     tools:context=".activities.CreateAcctActivity">
 
+    <!--Image View for Back Button-->
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="75dp"
+        android:layout_alignStart="@id/tv_create_acct"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/back_icon" />
+
     <!--Text View for Title-->
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_create_acct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_back"
         android:fontFamily="@font/tama_font"
-        android:gravity="center"
-        android:text="@string/title"
+        android:text="@string/create_account"
         android:textColor="@color/black"
-        android:textSize="50sp" />
+        android:textSize="45sp" />
 
     <!--Edit Text for Username-->
 
@@ -31,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/tv_title"
+        android:layout_below="@id/tv_create_acct"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:fontFamily="@font/tama_font"
@@ -52,16 +64,16 @@
         android:hint="@string/password"
         android:inputType="textPersonName" />
 
-    <!--Button for Login-->
+    <!--Button for Sign Up-->
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/et_pwd"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/tama_font"
-        android:text="@string/register" />
+        android:text="@string/sign_up" />
 
 </RelativeLayout>
