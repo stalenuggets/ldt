@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Relative Layout Is Used-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".activities.RegisterActivity">
+
+    <!--Image View for Back Button-->
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="75dp"
+        android:layout_alignStart="@id/tv_create_acct"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/back_icon" />
+
+    <!--Text View for Title-->
+
+    <TextView
+        android:id="@+id/tv_create_acct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_back"
+        android:fontFamily="@font/tama_font"
+        android:text="@string/create_account"
+        android:textColor="@color/black"
+        android:textSize="45sp" />
+
+    <!--Edit Text for Username-->
+
+    <EditText
+        android:id="@+id/et_usr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tv_create_acct"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:maxLength="12"
+        android:fontFamily="@font/tama_font"
+        android:hint="@string/username"
+        android:inputType= "text" />
+
+    <!--Edit Text for Password-->
+
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_usr"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:maxLength="12"
+        android:fontFamily="@font/tama_font"
+        android:hint="@string/password"
+        android:inputType="textPersonName" />
+
+    <!--Button for Sign Up-->
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_pwd"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/tama_font"
+        android:text="@string/sign_up" />
+
+</RelativeLayout>

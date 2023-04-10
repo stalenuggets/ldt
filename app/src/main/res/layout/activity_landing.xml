@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.LandingActivity">
 
     <!--Text View for Title-->
 
@@ -30,40 +30,38 @@
         android:id="@+id/iv_icon"
         android:layout_width="190dp"
         android:layout_height="200dp"
-        android:layout_marginTop="50dp"
-        android:layout_alignStart="@id/btn_create_acct"
         android:layout_below="@id/tv_ldt"
-        android:gravity="center_horizontal"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="50dp"
         app:srcCompat="@drawable/icon" />
 
-    <!--Button for Login-->
+    <!--Button for Start Game-->
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_start_game"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/iv_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/tama_font"
         android:gravity="center"
-        android:text="@string/Login"
+        android:text="@string/start_game"
         android:textSize="15sp" />
 
-    <!--Button for Create an Account-->
+    <!--Text View for Username-->
 
-    <Button
-        android:id="@+id/btn_create_acct"
-        style="@style/Widget.AppCompat.Button.Borderless"
+    <TextView
+        android:id="@+id/tv_usr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btn_start_game"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_login"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/tama_font"
         android:gravity="center"
-        android:text="@string/create_an_account"
+        android:text="User: [Username]"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
