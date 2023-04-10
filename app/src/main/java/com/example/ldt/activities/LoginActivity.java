@@ -66,10 +66,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     //If user is valid and admin
                     if (isValid(userDao, user, usr, pwd) && user.isAdmin()) {
-                        openAdminActivity();
+                        openAdminActivity(usr);
                         //If user is valid and NOT admin
                     } else if (isValid(userDao, user, usr, pwd) && !user.isAdmin()) {
-                        openLandingActivity();
+                        openLandingActivity(usr);
                     }
                 } catch (NullPointerException e){
                     e.printStackTrace();
@@ -91,16 +91,19 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Open LandingActivity
      */
-    private void openLandingActivity() {
+    private void openLandingActivity(String usr) {
         Intent intent = new Intent(this, LandingActivity.class);
+        intent.putExtra("usr", usr);
         startActivity(intent);
+
     }
 
     /**
      * Open AdminActivity
      */
-    private void openAdminActivity() {
+    private void openAdminActivity(String usr) {
         Intent intent = new Intent(this, AdminActivity.class);
+        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
@@ -114,13 +117,17 @@ public class LoginActivity extends AppCompatActivity {
         if (usr.isEmpty() || pwd.isEmpty()) {
             Toast.makeText(this, "Missing required fields", Toast.LENGTH_SHORT).show();
             return false;
-        }
-        //Check if username and password match user info in database
-        else if (user.getUsr().equals(usr) && user.getPwd().equals(pwd)) {
-            return true;
-        } else {
+        //Check if user is null
+        } else if (user == null) {
             Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             return false;
+        }
+        //Check if either username or password are incorrect
+        else if (!user.getUsr().equals(usr) || !user.getPwd().equals(pwd)) {
+            Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
         }
     }
 

@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="25dp"
     android:background="@color/light_grey"
     tools:context=".activities.RegisterActivity">
 
@@ -17,7 +18,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="75dp"
-        android:layout_alignStart="@id/tv_create_acct"
+        android:layout_marginStart="25dp"
         android:clickable="true"
         android:focusable="true"
         app:srcCompat="@drawable/back_icon" />
@@ -28,13 +29,14 @@
         android:id="@+id/tv_create_acct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:layout_below="@id/btn_back"
         android:fontFamily="@font/tama_font"
         android:text="@string/create_account"
         android:textColor="@color/black"
-        android:textSize="45sp" />
+        android:textSize="40sp" />
 
     <!--Edit Text for Username-->
 

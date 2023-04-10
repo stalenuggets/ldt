@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity{
 
                     //If registration is valid - proceed to LandingActivity
                     if (isValid(userDao, usr, pwd)) {
-                        openLandingActivity();
+                        openLandingActivity(usr);
                     }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -86,8 +86,9 @@ public class RegisterActivity extends AppCompatActivity{
     /**
      * Open LandingActivity
      */
-    private void openLandingActivity() {
+    private void openLandingActivity(String usr) {
         Intent intent = new Intent(this, LandingActivity.class);
+        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
