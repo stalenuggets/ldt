@@ -19,18 +19,52 @@ import java.util.List;
 public interface UserDao {
 
     @Insert
-    void insert(User... user);
+    void insertUsers(User... user);
 
     @Update
-    void update(User... user);
+    void updateUsers(User... user);
 
     @Delete
-    void delete(User user);
+    void deleteUser(User user);
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " ORDER BY mUid ASC")
-    List<User> getAllUsers();
+    /**
+     * get all user id
+     * @return all user id
+     */
+    @Query("SELECT uid FROM " + AppDatabase.USER_TABLE)
+    public List<Integer> getAllUid();
 
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUid = :uid")
-    User getUserById(int uid);
+    /**
+     * Get all usernames
+     * @return all usernames
+     */
+    @Query("SELECT usr FROM " + AppDatabase.USER_TABLE)
+    public List<String> getAllUsernames();
+
+    /**
+     * Get all isAdmin
+     * @return all isAdmin
+     */
+    @Query("SELECT isAdmin FROM " + AppDatabase.USER_TABLE)
+    public List<Boolean> getAllIsAdmin();
+
+    /**
+     * get user by user id
+     * @param uid user id
+     * @return user
+     */
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE uid = :uid")
+    User findByUid(int uid);
+
+    /**
+     * Get user by username
+     * @param usr username
+     * @return user
+     */
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE usr = :usr")
+    User findByUsername(String usr);
 
 }
+
+
+

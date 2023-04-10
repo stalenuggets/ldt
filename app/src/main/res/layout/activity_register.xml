@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey"
-    tools:context=".activities.CreateAcctActivity">
+    tools:context=".activities.RegisterActivity">
 
     <!--Image View for Back Button-->
 
@@ -46,9 +46,10 @@
         android:layout_below="@id/tv_create_acct"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:maxLength="12"
         android:fontFamily="@font/tama_font"
         android:hint="@string/username"
-        android:inputType="textPersonName" />
+        android:inputType= "text" />
 
     <!--Edit Text for Password-->
 
@@ -60,6 +61,7 @@
         android:layout_below="@id/et_usr"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:maxLength="12"
         android:fontFamily="@font/tama_font"
         android:hint="@string/password"
         android:inputType="textPersonName" />

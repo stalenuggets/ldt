@@ -16,7 +16,8 @@ import androidx.room.PrimaryKey;
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    private int mUid;
+    @ColumnInfo(name = "uid")
+    private int mUid = 0;
 
     @ColumnInfo(name = "usr")
     private String mUsr;
@@ -28,7 +29,7 @@ public class User {
     private boolean mIsAdmin;
 
     /**
-     * constructor with 2 param
+     * Constructor with 2 param
      * @param usr username
      * @param pwd password
      */
@@ -38,7 +39,7 @@ public class User {
     }
 
     /**
-     * constructor with 3 param
+     * Constructor with 3 param
      * @param usr username
      * @param pwd password
      * @param isAdmin admin status
@@ -50,7 +51,7 @@ public class User {
     }
 
     /**
-     * getter for user id
+     * Getter for user id
      * @return user id
      */
     public int getUid() {
@@ -58,7 +59,7 @@ public class User {
     }
 
     /**
-     * getter for username
+     * Getter for username
      * @return username
      */
     public String getUsr() {
@@ -66,7 +67,7 @@ public class User {
     }
 
     /**
-     * getter for password
+     * Getter for password
      * @return password
      */
     public String getPwd() {
@@ -74,57 +75,19 @@ public class User {
     }
 
     /**
-     * getter for admin
+     * Getter for admin
      * @return admin status
      */
-    public boolean getIsAdmin() {
+    public boolean isAdmin() {
         return mIsAdmin;
     }
 
     /**
-     * setter for user id
+     * Setter for user id
      * @param mUid user id
      */
     public void setUid(int mUid) {
         this.mUid = mUid;
-    }
-
-    /**
-     * setter for username
-     * @param mUsr username
-     */
-    public void setUsr(String mUsr) {
-        this.mUsr = mUsr;
-    }
-
-    /**
-     * setter for password
-     * @param mPwd password
-     */
-    public void setPwd(String mPwd) {
-        this.mPwd = mPwd;
-    }
-
-    /**
-     * setter for isAdmin
-     * @param mIsAdmin isAdmin
-     */
-    public void setIsAdmin(boolean mIsAdmin) {
-        this.mIsAdmin = mIsAdmin;
-    }
-
-    /**
-     * toString for USER_TABLE
-     * @return USER_TABLE contents
-     */
-    @Override
-    public String toString() {
-        return "User{" +
-                "mUid=" + mUid +
-                ", mUsr='" + mUsr + '\'' +
-                ", mPwd='" + mPwd + '\'' +
-                ", mIsAdmin=" + mIsAdmin +
-                '}';
     }
 
 }

@@ -13,10 +13,10 @@ import androidx.room.RoomDatabase;
 @Database(entities = {User.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    //declare fields
+    //Declare fields
     public static final String DB_NAME = "DB_NAME";
     public static final String USER_TABLE = "USER_TABLE";
 
-    public abstract UserDao getUserDao();
+    public abstract UserDao userDao();
 
 }

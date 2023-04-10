@@ -1,12 +1,18 @@
 package com.example.ldt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.ldt.databinding.ActivityMainBinding;
+import com.example.ldt.db.AppDatabase;
+import com.example.ldt.db.User;
+import com.example.ldt.db.UserDao;
+import com.google.android.material.tabs.TabLayout;
 
 /**
  * @author Erika Iwata
@@ -17,8 +23,9 @@ import com.example.ldt.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    //declare fields
-    private ActivityMainBinding mBinding;
+    //Declare fields
+    private ActivityMainBinding binding;
+    private UserDao userDao;
 
     /**
      * Tells program what to do when this activity is created
@@ -29,23 +36,25 @@ public class MainActivity extends AppCompatActivity {
 
         //onCreate setup
         super.onCreate(savedInstanceState);
-        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = mBinding.getRoot();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
         setContentView(view);
 
-        //click - login button
-        mBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
+        addPredefinedUsers();
+
+        //Click - login button
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openLoginActivity();
             }
         });
 
-        //click - create an account button
-        mBinding.btnCreateAcct.setOnClickListener(new View.OnClickListener() {
+        //Click - create an account button
+        binding.btnCreateAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openCreateAcctActivity();
+                openRegisterActivity();
             }
         });
 
@@ -54,17 +63,36 @@ public class MainActivity extends AppCompatActivity {
     /**
      *  Open LoginActivity
      */
-    public void openLoginActivity() {
+    private void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
     /**
-     *  Open CreateAcctActivity
+     *  Open RegisterActivity
      */
-    public void openCreateAcctActivity() {
-        Intent intent = new Intent(this, CreateAcctActivity.class);
+    private void openRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Add predefined users to the database
+     */
+    private void addPredefinedUsers() {
+        //Build database
+        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().userDao();
+
+        //Predefined users
+        User testuser1 = new User("testuser1", "testuser1");
+        User admin2 = new User("admin2", "admin2", true);
+
+        //If predefined users are NOT in database, add them
+        if (userDao.findByUsername("testuser1") == null && userDao.findByUsername("admin2") == null) {
+            userDao.insertUsers(testuser1, admin2);
+        }
+
     }
 
 }
