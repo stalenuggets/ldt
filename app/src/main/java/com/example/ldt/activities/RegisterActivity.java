@@ -1,16 +1,21 @@
 package com.example.ldt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityRegisterBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.User;
@@ -107,13 +112,25 @@ public class RegisterActivity extends AppCompatActivity{
      */
     private boolean isValid(UserDao userDao, String usr, String pwd) {
 
+        //Toast create
+        Toast toast = new Toast(this);
+        TextView tv = new TextView(this);
+        Typeface font = ResourcesCompat.getFont(this, R.font.arcade_classic);
+        tv.setTypeface(font);
+        tv.setTextColor(Color.RED);
+        tv.setTextSize(15);
+
         //Check for empty entries
         if (usr.isEmpty() || pwd.isEmpty()) {
-            Toast.makeText(this, "Missing required fields", Toast.LENGTH_SHORT).show();
+            tv.setText("Missing required fields");
+            toast.setView(tv);
+            toast.show();
             return false;
         //Check if username is already taken
         } else if (userDao.getAllUsernames().contains(usr)) {
-            Toast.makeText(this, "Username already taken", Toast.LENGTH_SHORT).show();
+            tv.setText("Username already taken");
+            toast.setView(tv);
+            toast.show();
             return false;
         //Add user to database
         } else {

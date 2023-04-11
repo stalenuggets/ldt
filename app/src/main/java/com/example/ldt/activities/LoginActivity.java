@@ -2,17 +2,22 @@ package com.example.ldt.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityLoginBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.User;
@@ -117,18 +122,25 @@ public class LoginActivity extends AppCompatActivity {
      */
     private boolean isValid(UserDao userDao, User user, String usr, String pwd) {
 
+        //Toast create
+        Toast toast = new Toast(this);
+        TextView tv = new TextView(this);
+        Typeface font = ResourcesCompat.getFont(this, R.font.arcade_classic);
+        tv.setTypeface(font);
+        tv.setTextColor(Color.RED);
+        tv.setTextSize(15);
+
         //Check if username or password is empty
         if (usr.isEmpty() || pwd.isEmpty()) {
-            Toast.makeText(this, "Missing required fields", Toast.LENGTH_SHORT).show();
+            tv.setText("Missing required fields");
+            toast.setView(tv);
+            toast.show();
             return false;
-        //Check if user is null
-        } else if (user == null) {
-            Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        //Check if either username or password are incorrect
-        else if (!user.getUsr().equals(usr) || !user.getPwd().equals(pwd)) {
-            Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
+            //Check if user does NOT exist or check if either username or password are incorrect
+        } else if (user == null || !user.getUsr().equals(usr) || !user.getPwd().equals(pwd)) {
+            tv.setText("Incorrect username or password");
+            toast.setView(tv);
+            toast.show();
             return false;
         } else {
             //Store login info
