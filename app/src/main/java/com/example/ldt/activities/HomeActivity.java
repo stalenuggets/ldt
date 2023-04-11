@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityHomeBinding;
 import com.example.ldt.databinding.MenuDeleteConfirmBinding;
 import com.example.ldt.databinding.MenuExitBinding;
+import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.UserDao;
 
 /**
@@ -63,7 +66,8 @@ public class HomeActivity extends AppCompatActivity {
         View view = binding.getRoot();
 
         dialogBuilder.setView(view);
-        dialogBuilder.create().show();
+        Dialog exitDialog = dialogBuilder.create();
+        exitDialog.show();
 
         //Click - quit game button
         binding.btnQuitGame.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDeleteConfirm();
+                openDeleteConfirm(exitDialog);
             }
         });
     }
@@ -94,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Delete confirm menu
      */
-    public void openDeleteConfirm() {
+    public void openDeleteConfirm(Dialog exitDialog) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -102,7 +106,12 @@ public class HomeActivity extends AppCompatActivity {
         View view = binding.getRoot();
 
         dialogBuilder.setView(view);
-        dialogBuilder.create().show();
+        Dialog deleteDialog = dialogBuilder.create();
+        deleteDialog.show();
+
+        //Build database
+        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().userDao();
 
         //Click - Yes button
         binding.btnYes.setOnClickListener(new View.OnClickListener() {
@@ -115,8 +124,8 @@ public class HomeActivity extends AppCompatActivity {
                 String usr = sharedPref.getString("usr", "");
 
                 //delete user
-                userDao.deleteUser(userDao.findByUsername(usr));
                 editor.clear().apply();
+                userDao.deleteUser(userDao.findByUsername(usr));
 
                 openMainActivity();
             }
@@ -126,8 +135,9 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Close menu
-                dialogBuilder.create().dismiss();
+                //Close both dialog menus
+                deleteDialog.dismiss();
+                exitDialog.dismiss();
             }
         });
     }
@@ -136,9 +146,8 @@ public class HomeActivity extends AppCompatActivity {
      * Open LandingActivity
      */
     public void openLandingActivity() {
-        Intent intent = new Intent(this, LandingActivity.class);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        Intent intent = new Intent(this, LandingActivity.class);
         intent.putExtra("usr", sharedPref.getString("usr", ""));
         startActivity(intent);
     }
