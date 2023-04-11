@@ -3,8 +3,11 @@ package com.example.ldt.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     //Declare fields
     private ActivityMainBinding binding;
     private UserDao userDao;
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     /**
      * Tells program what to do when this activity is created
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         addPredefinedUsers();
+        skipLogin();
 
         //Click - login button
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +79,22 @@ public class MainActivity extends AppCompatActivity {
     private void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Check if user is already logged in
+     */
+    public void skipLogin() {
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String usr = sharedPref.getString("usr", "loggedOut");
+
+        //If user is NOT logged out - go to LandingActivity
+        if (usr != "loggedOut") {
+            Intent intent = new Intent(this, LandingActivity.class);
+            intent.putExtra("usr", usr);
+            startActivity(intent);
+        }
     }
 
     /**

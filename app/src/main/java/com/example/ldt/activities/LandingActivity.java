@@ -3,8 +3,12 @@ package com.example.ldt.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -54,14 +58,22 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+        //Click - start game button
+        binding.btnStartGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeActivity();
+            }
+        });
+
     }
 
     /**
      * Open HomeActivity
      */
     private void openHomeActivity() {
-//        Intent intent = new Intent(this, HomeActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
 }

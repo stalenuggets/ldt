@@ -55,6 +55,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //Click - start game button
+        binding.btnStartGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeActivity();
+            }
+        });
+
     }
 
     /**
@@ -62,6 +70,14 @@ public class AdminActivity extends AppCompatActivity {
      */
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open HomeActivity
+     */
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 }

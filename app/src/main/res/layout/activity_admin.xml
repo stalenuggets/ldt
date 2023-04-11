@@ -38,44 +38,29 @@
         android:textColor="@color/black"
         android:textSize="50sp" />
 
-    <!--Button for Add Admin User-->
+    <!--Button for Start Game-->
 
     <Button
-        android:id="@+id/btn_add_admin_user"
+        android:id="@+id/btn_start_game"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_admin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:fontFamily="@font/tama_font"
         android:gravity="center"
-        android:text="Add Admin User"
+        android:text="@string/start_game"
         android:textSize="15sp" />
 
-    <!--Button for Loop Up User Info-->
-
-    <Button
-        android:id="@+id/btn_look_up_user_info"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_add_admin_user"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/tama_font"
-        android:gravity="center"
-        android:text="Look Up User Info"
-        android:textSize="15sp" />
-
-    <!--Button for Game Config-->
+    <!--Button for Game Configuration-->
 
     <Button
         android:id="@+id/btn_game_config"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_look_up_user_info"
+        android:layout_below="@id/btn_start_game"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/tama_font"
@@ -83,13 +68,29 @@
         android:text="Game Configuration"
         android:textSize="15sp" />
 
+    <!--Button for Manage Existing Users-->
+
+    <Button
+        android:id="@+id/btn_manage_users"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_game_config"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/tama_font"
+        android:gravity="center"
+        android:text="Manage existing users"
+        android:textSize="15sp" />
+
+
     <!--Text View for Username-->
 
     <TextView
         android:id="@+id/tv_usr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_game_config"
+        android:layout_below="@+id/btn_manage_users"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/tama_font"

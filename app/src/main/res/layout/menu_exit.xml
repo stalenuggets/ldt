@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Relative Layout is Used-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/light_grey"
+    android:padding="25dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".activities.HomeActivity">
+
+    <!--Text View for Title-->
+
+    <TextView
+        android:id="@+id/tv_exit_menu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:fontFamily="@font/tama_font"
+        android:text="Exit Game Menu"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
+
+    <!--Button for Quit Game-->
+
+    <Button
+        android:id="@+id/btn_quit_game"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_exit_menu_title"
+        android:fontFamily="@font/tama_font"
+        android:text="Quit Game"
+        android:textAlignment="textStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <!--Button for Logout-->
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_quit_game"
+        android:fontFamily="@font/tama_font"
+        android:text="Logout"
+        android:textAlignment="textStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <!--Button for Delete Account-->
+
+    <Button
+        android:id="@+id/btn_delete_account"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_logout"
+        android:fontFamily="@font/tama_font"
+        android:text="Delete Account"
+        android:textAlignment="textStart"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+
+
+</RelativeLayout>

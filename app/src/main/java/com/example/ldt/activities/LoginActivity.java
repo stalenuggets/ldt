@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -27,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     //Declare fields
     private ActivityLoginBinding binding;
     private UserDao userDao;
+    public static final String SHARED_PREFS = "sharedPrefs";
 
     /**
      * Tells program what to do when this activity is created
@@ -127,6 +131,12 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
             return false;
         } else {
+            //Store login info
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("usr", usr);
+            editor.apply();
+
             return true;
         }
     }
