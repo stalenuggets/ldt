@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -43,9 +46,13 @@ public class AdminActivity extends AppCompatActivity {
         userDao = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries().build().userDao();
 
+        //Get shared preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         //Display username
         TextView usr = (TextView) binding.tvUsr;
-        usr.setText("User: " + getIntent().getStringExtra("usr"));
+        String usrDisplay = "<font color=#000000>User: </font> <font color=#4169E1>" + sharedPref.getString("usr", "loggedOut") + "</font>";
+        usr.setText(Html.fromHtml(usrDisplay));
 
         //Click - start game button
         binding.btnStartGame.setOnClickListener(new View.OnClickListener() {
@@ -55,14 +62,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    /**
-     * Open MainActivity
-     */
-    private void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
     /**

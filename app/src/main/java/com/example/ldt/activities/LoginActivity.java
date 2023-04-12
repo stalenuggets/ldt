@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     //Declare fields
     private ActivityLoginBinding binding;
     private UserDao userDao;
-    public static final String SHARED_PREFS = "sharedPrefs";
 
     /**
      * Tells program what to do when this activity is created
@@ -50,6 +49,14 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        //Build database
+        userDao = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().userDao();
+
+        //Get shared preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         //Click - back button
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,25 +70,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Build database
-                userDao = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
-                        .allowMainThreadQueries().build().userDao();
+                //Set variables
+                String usr = binding.etUsr.getText().toString();
+                String pwd = binding.etPwd.getText().toString();
+                User user = userDao.findByUsername(usr);
 
-                try {
-                    //initialize variables
-                    String usr = binding.etUsr.getText().toString();
-                    String pwd = binding.etPwd.getText().toString();
-                    User user = userDao.findByUsername(usr);
-
-                    //If user is valid and admin
-                    if (isValid(userDao, user, usr, pwd) && user.isAdmin()) {
-                        openAdminActivity(usr);
-                        //If user is valid and NOT admin
-                    } else if (isValid(userDao, user, usr, pwd) && !user.isAdmin()) {
-                        openLandingActivity(usr);
-                    }
-                } catch (NullPointerException e){
-                    e.printStackTrace();
+                //If user is valid and admin
+                if (isValid(user, usr, pwd, editor) && user.isAdmin()) {
+                    openAdminActivity();
+                //If user is valid and NOT admin
+                } else if (isValid(user, usr, pwd, editor) && !user.isAdmin()) {
+                    openLandingActivity();
                 }
 
             }
@@ -100,9 +99,8 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Open LandingActivity
      */
-    private void openLandingActivity(String usr) {
+    private void openLandingActivity() {
         Intent intent = new Intent(this, LandingActivity.class);
-        intent.putExtra("usr", usr);
         startActivity(intent);
 
     }
@@ -110,9 +108,8 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Open AdminActivity
      */
-    private void openAdminActivity(String usr) {
+    private void openAdminActivity() {
         Intent intent = new Intent(this, AdminActivity.class);
-        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
@@ -120,14 +117,16 @@ public class LoginActivity extends AppCompatActivity {
      * Check login info
      * @return valid or invalid
      */
-    private boolean isValid(UserDao userDao, User user, String usr, String pwd) {
+    private boolean isValid(User user, String usr, String pwd, SharedPreferences.Editor editor) {
 
-        //Toast create
+        //Create Toast
         Toast toast = new Toast(this);
         TextView tv = new TextView(this);
         Typeface font = ResourcesCompat.getFont(this, R.font.arcade_classic);
+
+        //Customize Toast
         tv.setTypeface(font);
-        tv.setTextColor(Color.RED);
+        tv.setTextColor(Color.rgb(210, 43, 43));
         tv.setTextSize(15);
 
         //Check if username or password is empty
@@ -136,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             toast.setView(tv);
             toast.show();
             return false;
-            //Check if user does NOT exist or check if either username or password are incorrect
+        //Check if user does NOT exist or check if either username or password are incorrect
         } else if (user == null || !user.getUsr().equals(usr) || !user.getPwd().equals(pwd)) {
             tv.setText("Incorrect username or password");
             toast.setView(tv);
@@ -144,11 +143,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         } else {
             //Store login info
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("usr", usr);
-            editor.apply();
-
+            editor.putString("usr", usr).apply();
             return true;
         }
     }

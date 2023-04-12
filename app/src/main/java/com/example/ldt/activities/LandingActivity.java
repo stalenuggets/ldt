@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +28,6 @@ public class LandingActivity extends AppCompatActivity {
 
     //Declare Fields
     private ActivityLandingBinding binding;
-    private UserDao userDao;
 
     /**
      * Tells program what to do when this activity is created
@@ -42,21 +42,13 @@ public class LandingActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        //Build database
-        userDao = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries().build().userDao();
+        //Get shared preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         //Display username
         TextView usr = (TextView) binding.tvUsr;
-        usr.setText("User: " + getIntent().getStringExtra("usr"));
-
-        //Click - start game button
-        binding.btnStartGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openHomeActivity();
-            }
-        });
+        String usrDisplay = "<font color=#000000>User: </font> <font color=#4169E1>" + sharedPref.getString("usr", "") + "</font>";
+        usr.setText(Html.fromHtml(usrDisplay));
 
         //Click - start game button
         binding.btnStartGame.setOnClickListener(new View.OnClickListener() {

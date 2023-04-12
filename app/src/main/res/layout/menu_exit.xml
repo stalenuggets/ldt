@@ -79,7 +79,7 @@
         android:text="Delete Account"
         android:textAlignment="textStart"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:textColor="@color/black"
+        android:textColor="@color/red"
         android:textSize="15sp" />
 
 

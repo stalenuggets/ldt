@@ -46,9 +46,6 @@ public class HomeActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        //TODO
-        Log.d("home", "onCreate");
-
         //Build database
         userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries().build().userDao();
@@ -62,15 +59,11 @@ public class HomeActivity extends AppCompatActivity {
         binding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //TODO
-                Log.d("home", "back btn");
-
                 //If user is admin
                 if (userDao.findByUsername(usr).isAdmin()) {
-                    openAdminActivity(usr);
+                    openAdminActivity();
                 } else {
-                    openLandingActivity(usr);
+                    openLandingActivity();
                 }
 
             }
@@ -80,15 +73,11 @@ public class HomeActivity extends AppCompatActivity {
         binding.ivExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //TODO
-                Log.d("home", "exit btn");
-
                 openExitMenu(userDao, usr, editor);
             }
         });
 
-    }
+    } //End onCreate
 
     /**
      * Open Exit Menu
@@ -120,9 +109,9 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //If user is admin
                 if (userDao.findByUsername(usr).isAdmin()) {
-                    openAdminActivity(usr);
+                    openAdminActivity();
                 } else {
-                    openLandingActivity(usr);
+                    openLandingActivity();
                 }
             }
         });
@@ -143,7 +132,8 @@ public class HomeActivity extends AppCompatActivity {
                 openDeleteConfirm(exitDialog, userDao, usr, editor);
             }
         });
-    }
+
+    } //End openExitMenu
 
     /**
      * Open Delete confirm menu
@@ -161,7 +151,7 @@ public class HomeActivity extends AppCompatActivity {
         deleteDialog.setCanceledOnTouchOutside(false);
         deleteDialog.show();
 
-        //Click - Close window
+        //Click - Close window button
         binding.btnCloseWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,9 +186,8 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open LandingActivity
      */
-    public void openLandingActivity(String usr) {
+    public void openLandingActivity() {
         Intent intent = new Intent(this, LandingActivity.class);
-        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
@@ -220,9 +209,8 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open AdminActivity
      */
-    public void openAdminActivity(String usr) {
+    public void openAdminActivity() {
         Intent intent = new Intent(this, AdminActivity.class);
-        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
