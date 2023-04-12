@@ -15,8 +15,8 @@ import androidx.room.Room;
 
 import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityHomeBinding;
-import com.example.ldt.databinding.MenuDeleteConfirmBinding;
-import com.example.ldt.databinding.MenuExitBinding;
+import com.example.ldt.databinding.DialogueExitGameBinding;
+import com.example.ldt.databinding.DialogueDeleteAcctBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.UserDao;
 
@@ -73,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.ivExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openExitMenu(userDao, usr, editor);
+                openExitGame(userDao, usr, editor);
             }
         });
 
@@ -82,11 +82,11 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Exit Menu
      */
-    public void openExitMenu(UserDao userDao, String usr, SharedPreferences.Editor editor) {
+    public void openExitGame(UserDao userDao, String usr, SharedPreferences.Editor editor) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        MenuExitBinding binding = MenuExitBinding.inflate(getLayoutInflater());
+        DialogueExitGameBinding binding = DialogueExitGameBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         //Customize Dialog popup
@@ -129,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDeleteConfirm(exitDialog, userDao, usr, editor);
+                openDeleteAcct(exitDialog, userDao, usr, editor);
             }
         });
 
@@ -138,11 +138,11 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Delete confirm menu
      */
-    public void openDeleteConfirm(Dialog exitDialog, UserDao userDao, String usr, SharedPreferences.Editor editor) {
+    public void openDeleteAcct(Dialog exitDialog, UserDao userDao, String usr, SharedPreferences.Editor editor) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        MenuDeleteConfirmBinding binding = MenuDeleteConfirmBinding.inflate(getLayoutInflater());
+        DialogueDeleteAcctBinding binding = DialogueDeleteAcctBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         //Customize dialog popup
@@ -184,18 +184,18 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
+     * Logout current user
+     */
+    public void logout(SharedPreferences.Editor editor) {
+        editor.clear().apply();
+    }
+
+    /**
      * Open LandingActivity
      */
     public void openLandingActivity() {
         Intent intent = new Intent(this, LandingActivity.class);
         startActivity(intent);
-    }
-
-    /**
-     * Logout current user
-     */
-    public void logout(SharedPreferences.Editor editor) {
-        editor.clear().apply();
     }
 
     /**
