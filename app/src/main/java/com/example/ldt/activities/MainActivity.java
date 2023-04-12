@@ -3,8 +3,11 @@ package com.example.ldt.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -40,7 +43,17 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        addPredefinedUsers();
+        //Build database
+        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().userDao();
+
+        //Get shared preferences
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String usr = sharedPref.getString("usr", "loggedOut");
+
+        //Check if predefined users are added AND user is already logged in
+        addPredefinedUsers(userDao);
+        skipLogin(userDao, usr);
 
         //Click - login button
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      *  Open LoginActivity
      */
-    private void openLoginActivity() {
+    public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
@@ -71,18 +84,44 @@ public class MainActivity extends AppCompatActivity {
     /**
      *  Open RegisterActivity
      */
-    private void openRegisterActivity() {
+    public void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
     /**
+     * Open LandingActivity
+     */
+    public void openLandingActivity() {
+        Intent intent = new Intent(this, LandingActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open AdminActivity
+     */
+    public void openAdminActivity() {
+        Intent intent = new Intent(this, AdminActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Check if user is already logged in
+     */
+    public void skipLogin(UserDao userDao, String usr) {
+        //If user is NOT logged out and NOT admin
+        if (usr != "loggedOut" && !userDao.findByUsername(usr).isAdmin()) {
+            openLandingActivity();
+        //If user is NOT logged out and is admin
+        } else if (usr != "loggedOut" && userDao.findByUsername(usr).isAdmin()) {
+            openAdminActivity();
+        }
+    }
+
+    /**
      * Add predefined users to the database
      */
-    private void addPredefinedUsers() {
-        //Build database
-        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries().build().userDao();
+    public void addPredefinedUsers(UserDao userDao) {
 
         //Predefined users
         User testuser1 = new User("testuser1", "testuser1");
@@ -92,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         if (userDao.findByUsername("testuser1") == null && userDao.findByUsername("admin2") == null) {
             userDao.insertUsers(testuser1, admin2);
         }
-
     }
 
 }
