@@ -11,18 +11,6 @@
     android:background="@color/light_grey"
     tools:context=".activities.AdminActivity">
 
-    <!--Image View for Back Button-->
-
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginStart="25dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:srcCompat="@drawable/back_icon" />
-
     <!--Text View for Title-->
 
     <TextView
@@ -30,8 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_below="@id/btn_back"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/tama_font"
         android:gravity="center"
         android:text="Admin Dashboard"

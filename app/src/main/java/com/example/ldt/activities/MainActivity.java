@@ -86,14 +86,22 @@ public class MainActivity extends AppCompatActivity {
      */
     public void skipLogin() {
 
+        //Get user preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String usr = sharedPref.getString("usr", "loggedOut");
 
-        //If user is NOT logged out - go to LandingActivity
-        if (usr != "loggedOut") {
+        //Build database
+        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().userDao();
+
+        //If user is NOT logged out and NOT admin
+        if (usr != "loggedOut" && !userDao.findByUsername(usr).isAdmin()) {
             Intent intent = new Intent(this, LandingActivity.class);
             intent.putExtra("usr", usr);
             startActivity(intent);
+        //If user is NOT logged out and is admin
+        } else if (usr != "loggedOut" && userDao.findByUsername(usr).isAdmin()) {
+
         }
     }
 

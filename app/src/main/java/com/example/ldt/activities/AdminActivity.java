@@ -47,14 +47,6 @@ public class AdminActivity extends AppCompatActivity {
         TextView usr = (TextView) binding.tvUsr;
         usr.setText("User: " + getIntent().getStringExtra("usr"));
 
-        //Click - back button
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openMainActivity();
-            }
-        });
-
         //Click - start game button
         binding.btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override

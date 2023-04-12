@@ -7,6 +7,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!--Image View for Close Window-->
+
+    <ImageButton
+        android:id="@+id/btn_close_window"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/close_window" />
+
     <!--Text View for Title-->
 
     <TextView
@@ -14,9 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:fontFamily="@font/tama_font"
-        android:text="Are you sure you want to delete your account"
+        android:text="Are you sure you want to delete your account?"
+        android:layout_below="@id/btn_close_window"
         android:textColor="@color/black"
         android:textSize="35sp" />
 
@@ -45,5 +57,6 @@
         android:fontFamily="@font/tama_font"
         android:text="No"
         android:textSize="15sp" />
+
 
 </RelativeLayout>

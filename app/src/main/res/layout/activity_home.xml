@@ -7,9 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+    android:background="#2c2c2e"
     tools:context=".activities.HomeActivity">
-
 
     <!--Image View for Back Button-->
 
@@ -22,9 +21,9 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_alignParentStart="true"
-        app:srcCompat="@drawable/back_icon" />
+        app:srcCompat="@drawable/back_icon_white" />
 
-    <!--Image View for Exit Button-->
+    <!--Image Button for Exit Button-->
 
     <ImageView
         android:id="@+id/iv_exit"
@@ -32,9 +31,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
-        android:layout_alignParentEnd="true"
         android:clickable="true"
         android:focusable="true"
+        android:layout_alignParentEnd="true"
         app:srcCompat="@drawable/exit_icon" />
 
     <!--Image View for Background-->

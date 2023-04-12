@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
      * Tells program what to do when this activity is created
      * @param savedInstanceState saved state of the application
      */
-    @Override
+//    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //onCreate setup
@@ -46,10 +46,45 @@ public class HomeActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        //TODO
+        Log.d("home", "onCreate");
+
+        //Build database
+        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().userDao();
+
+        //Get username
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String usr = sharedPref.getString("usr", "");
+
+        //Click - Back button
+        binding.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //TODO
+                Log.d("home", "back btn");
+
+                //If user is admin
+                if (userDao.findByUsername(usr).isAdmin()) {
+                    openAdminActivity(usr);
+                } else {
+                    openLandingActivity(usr);
+                }
+
+            }
+        });
+
+        //Click - Exit button
         binding.ivExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openExitMenu();
+
+                //TODO
+                Log.d("home", "exit btn");
+
+                openExitMenu(userDao, usr, editor);
             }
         });
 
@@ -58,22 +93,37 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Exit Menu
      */
-    public void openExitMenu() {
+    public void openExitMenu(UserDao userDao, String usr, SharedPreferences.Editor editor) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         MenuExitBinding binding = MenuExitBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        //Customize Dialog popup
         dialogBuilder.setView(view);
         Dialog exitDialog = dialogBuilder.create();
+        exitDialog.setCanceledOnTouchOutside(false);
         exitDialog.show();
+
+        //Click - Close Window
+        binding.btnCloseWindow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exitDialog.dismiss();
+            }
+        });
 
         //Click - quit game button
         binding.btnQuitGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openLandingActivity();
+                //If user is admin
+                if (userDao.findByUsername(usr).isAdmin()) {
+                    openAdminActivity(usr);
+                } else {
+                    openLandingActivity(usr);
+                }
             }
         });
 
@@ -81,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logout();
+                logout(editor);
                 openMainActivity();
             }
         });
@@ -90,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDeleteConfirm(exitDialog);
+                openDeleteConfirm(exitDialog, userDao, usr, editor);
             }
         });
     }
@@ -98,33 +148,34 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Delete confirm menu
      */
-    public void openDeleteConfirm(Dialog exitDialog) {
+    public void openDeleteConfirm(Dialog exitDialog, UserDao userDao, String usr, SharedPreferences.Editor editor) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         MenuDeleteConfirmBinding binding = MenuDeleteConfirmBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        //Customize dialog popup
         dialogBuilder.setView(view);
         Dialog deleteDialog = dialogBuilder.create();
+        deleteDialog.setCanceledOnTouchOutside(false);
         deleteDialog.show();
 
-        //Build database
-        userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries().build().userDao();
+        //Click - Close window
+        binding.btnCloseWindow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteDialog.dismiss();
+                exitDialog.dismiss();
+            }
+        });
 
         //Click - Yes button
         binding.btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //get username
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = sharedPref.edit();
-                String usr = sharedPref.getString("usr", "");
-
                 //delete user
-                editor.clear().apply();
+                logout(editor);
                 userDao.deleteUser(userDao.findByUsername(usr));
 
                 openMainActivity();
@@ -145,19 +196,16 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open LandingActivity
      */
-    public void openLandingActivity() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    public void openLandingActivity(String usr) {
         Intent intent = new Intent(this, LandingActivity.class);
-        intent.putExtra("usr", sharedPref.getString("usr", ""));
+        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
     /**
      * Logout current user
      */
-    public void logout() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPref.edit();
+    public void logout(SharedPreferences.Editor editor) {
         editor.clear().apply();
     }
 
@@ -166,6 +214,15 @@ public class HomeActivity extends AppCompatActivity {
      */
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open AdminActivity
+     */
+    public void openAdminActivity(String usr) {
+        Intent intent = new Intent(this, AdminActivity.class);
+        intent.putExtra("usr", usr);
         startActivity(intent);
     }
 
