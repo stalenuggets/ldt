@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="350dp">
+
+    <!--Relative Layout is Used-->
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_grey"
+        tools:context=".activities.HomeActivity">
+
+        <!-- Image View for Background -->
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/background" />
+
+        <!--Image View for Egg1-->
+
+        <ImageView
+            android:id="@+id/iv_egg"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_below="@id/iv_game"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            app:srcCompat="@drawable/egg1" />
+
+        <!--Image View for Feed Button-->
+
+        <ImageView
+            android:id="@+id/iv_feed"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_alignStart="@id/background"
+            android:layout_alignTop="@id/background"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/feed_icon" />
+
+        <!--Image View for Lights Button-->
+
+        <ImageView
+            android:id="@+id/iv_lights"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@id/iv_feed"
+            android:layout_alignTop="@id/background"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/lights_icon" />
+
+        <!--Image View for Game Button-->
+
+        <ImageView
+            android:id="@+id/iv_game"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/background"
+            android:layout_alignEnd="@id/iv_sick"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="85dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/game_icon" />
+
+        <!--Image View for Sick Button-->
+
+        <ImageView
+            android:id="@+id/iv_sick"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/background"
+            android:layout_alignEnd="@id/background"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/sick_icon" />
+
+        <!--Image View for Bathroom Button-->
+
+        <ImageView
+            android:id="@+id/iv_bathroom"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_feed"
+            android:layout_alignStart="@id/background"
+            android:layout_alignBottom="@id/background"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="205dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/bathroom_icon" />
+
+        <!--Image View for Health Button-->
+
+        <ImageView
+            android:id="@+id/iv_health"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_lights"
+            android:layout_alignStart="@id/iv_bathroom"
+            android:layout_alignBottom="@id/background"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="205dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/health_icon" />
+
+        <!--Image View for Discipline Button-->
+
+        <ImageView
+            android:id="@+id/iv_discipline"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_game"
+            android:layout_alignEnd="@id/iv_attention"
+            android:layout_alignBottom="@id/background"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="80dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/discipline_icon" />
+
+        <!--Image View for Attention Button-->
+
+        <ImageView
+            android:id="@+id/iv_attention"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_sick"
+            android:layout_alignEnd="@id/background"
+            android:layout_alignBottom="@id/background"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="25dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/attention_icon" />
+
+    </RelativeLayout>
+
+</FrameLayout>

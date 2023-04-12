@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2c2c2e"
+    android:background="@color/dark_grey"
     tools:context=".activities.HomeActivity">
 
     <!--Image View for Back Button-->
@@ -16,11 +16,11 @@
         android:id="@+id/iv_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="100dp"
         android:clickable="true"
         android:focusable="true"
-        android:layout_alignParentStart="true"
         app:srcCompat="@drawable/back_icon_white" />
 
     <!--Image Button for Exit Button-->
@@ -29,141 +29,22 @@
         android:id="@+id/iv_exit"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
         android:clickable="true"
         android:focusable="true"
-        android:layout_alignParentEnd="true"
         app:srcCompat="@drawable/exit_icon" />
 
-    <!--Image View for Background-->
+    <!--Fragment Container View-->
 
-    <ImageView
-        android:id="@+id/iv_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="75dp"
-        android:gravity="center_horizontal"
-        app:srcCompat="@drawable/background" />
-
-    <!--Image View for Egg1-->
-
-    <ImageView
-        android:id="@+id/iv_egg"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
-        android:layout_below="@id/iv_game"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/egg1" />
-
-    <!--Image View for Feed Button-->
-
-    <ImageView
-        android:id="@+id/iv_feed"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="15dp"
-        android:clickable="true"
-        android:focusable="true"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.ldt.fragments.MainFragment"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_below="@id/iv_back"
-        app:srcCompat="@drawable/feed_icon" />
-
-    <!--Image View for Lights Button-->
-
-    <ImageView
-        android:id="@+id/iv_lights"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginStart="90dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignStart="@id/iv_feed"
-        app:srcCompat="@drawable/lights_icon" />
-
-    <!--Image View for Game Button-->
-
-    <ImageView
-        android:id="@+id/iv_game"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd = "90dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignEnd="@id/iv_sick"
-        app:srcCompat="@drawable/game_icon" />
-
-    <!--Image View for Sick Button-->
-
-    <ImageView
-        android:id="@+id/iv_sick"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="25dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/iv_exit"
-        app:srcCompat="@drawable/sick_icon" />
-
-    <!--Image View for Bathroom Button-->
-
-    <ImageView
-        android:id="@+id/iv_bathroom"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginStart="15dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_below="@id/iv_feed"
-        app:srcCompat="@drawable/bathroom_icon" />
-
-    <!--Image View for Health Button-->
-
-    <ImageView
-        android:id="@+id/iv_health"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginStart="90dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignStart="@id/iv_bathroom"
-        android:layout_below="@id/iv_lights"
-        app:srcCompat="@drawable/health_icon" />
-
-    <!--Image View for Discipline Button-->
-
-    <ImageView
-        android:id="@+id/iv_discipline"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd = "90dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignEnd="@id/iv_attention"
-        android:layout_below="@id/iv_game"
-        app:srcCompat="@drawable/discipline_icon" />
-
-    <!--Image View for Attention Button-->
-
-    <ImageView
-        android:id="@+id/iv_attention"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="25dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/iv_sick"
-        app:srcCompat="@drawable/attention_icon" />
-
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
 
 </RelativeLayout>
