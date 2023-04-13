@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Relative Layout is Used-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:padding="25dp"
+    tools:context=".activities.AdminActivity">
+
+    <!--Image View for Close Window-->
+
+    <ImageButton
+        android:id="@+id/btn_close_window"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@color/light_grey"
+        app:srcCompat="@drawable/close_window" />
+
+    <!--Text View for Title-->
+
+    <TextView
+        android:id="@+id/tv_make_admin_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_close_window"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/tama_font"
+        android:gravity="center"
+        android:text="Make admin user"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
+
+    <!--Edit Text for Username-->
+
+    <EditText
+        android:id="@+id/et_usr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tv_make_admin_user"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:maxLength="12"
+        android:fontFamily="@font/tama_font"
+        android:hint="@string/username"
+        android:inputType= "text" />
+
+    <!--Button for Add Admin-->
+
+    <Button
+        android:id="@+id/btn_add_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_usr"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/tama_font"
+        android:text="Add Admin" />
+
+</RelativeLayout>

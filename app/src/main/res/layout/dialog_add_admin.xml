@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Relative Layout is Used-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:padding="25dp"
+    tools:context=".activities.AdminActivity">
+
+    <!--Image View for Close Window-->
+
+    <ImageButton
+        android:id="@+id/btn_close_window"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@color/light_grey"
+        app:srcCompat="@drawable/close_window" />
+
+    <!--Text View for Title-->
+
+    <TextView
+        android:id="@+id/tv_add_admin_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_close_window"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/tama_font"
+        android:gravity="center"
+        android:text="Add Admin User"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
+
+    <!--Button for Create New Admin-->
+
+    <Button
+        android:id="@+id/btn_create_new_user"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_add_admin_user"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/tama_font"
+        android:text="Create new user"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <!--Button for Choose From Existing-->
+
+    <Button
+        android:id="@+id/btn_choose_from_existing"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_create_new_user"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/tama_font"
+        android:text="Choose from existing"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+</RelativeLayout>
