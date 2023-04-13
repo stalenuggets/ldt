@@ -90,4 +90,11 @@ public class User {
         this.mUid = mUid;
     }
 
+    /**
+     * Setter for isAdmin
+     * @param mIsAdmin
+     */
+    public void setIsAdmin(boolean mIsAdmin) {
+        this.mIsAdmin = mIsAdmin;
+    }
 }

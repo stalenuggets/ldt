@@ -4,19 +4,23 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.room.Room;
 
 import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityHomeBinding;
-import com.example.ldt.databinding.DialogueExitGameBinding;
-import com.example.ldt.databinding.DialogueDeleteAcctBinding;
+import com.example.ldt.databinding.DialogDeleteAcctConfirmBinding;
+import com.example.ldt.databinding.DialogExitGameBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.UserDao;
 
@@ -73,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.ivExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openExitGame(userDao, usr, editor);
+                openExitGameDialog(userDao, usr, editor);
             }
         });
 
@@ -82,24 +86,24 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Exit Menu
      */
-    public void openExitGame(UserDao userDao, String usr, SharedPreferences.Editor editor) {
+    public void openExitGameDialog(UserDao userDao, String usr, SharedPreferences.Editor editor) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        DialogueExitGameBinding binding = DialogueExitGameBinding.inflate(getLayoutInflater());
+        DialogExitGameBinding binding = DialogExitGameBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         //Customize Dialog popup
         dialogBuilder.setView(view);
-        Dialog exitDialog = dialogBuilder.create();
-        exitDialog.setCanceledOnTouchOutside(false);
-        exitDialog.show();
+        Dialog dialog = dialogBuilder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         //Click - Close Window
         binding.btnCloseWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                exitDialog.dismiss();
+                dialog.dismiss();
             }
         });
 
@@ -129,7 +133,8 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDeleteAcct(exitDialog, userDao, usr, editor);
+                dialog.dismiss();
+                openDeleteAcctDialog(userDao, usr, editor);
             }
         });
 
@@ -138,25 +143,24 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Open Delete confirm menu
      */
-    public void openDeleteAcct(Dialog exitDialog, UserDao userDao, String usr, SharedPreferences.Editor editor) {
+    public void openDeleteAcctDialog(UserDao userDao, String usr, SharedPreferences.Editor editor) {
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        DialogueDeleteAcctBinding binding = DialogueDeleteAcctBinding.inflate(getLayoutInflater());
+        DialogDeleteAcctConfirmBinding binding = DialogDeleteAcctConfirmBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         //Customize dialog popup
         dialogBuilder.setView(view);
-        Dialog deleteDialog = dialogBuilder.create();
-        deleteDialog.setCanceledOnTouchOutside(false);
-        deleteDialog.show();
+        Dialog dialog = dialogBuilder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 
         //Click - Close window button
         binding.btnCloseWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteDialog.dismiss();
-                exitDialog.dismiss();
+                dialog.dismiss();
             }
         });
 
@@ -164,11 +168,12 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //delete user
-                logout(editor);
-                userDao.deleteUser(userDao.findByUsername(usr));
 
-                openMainActivity();
+                //Check if user is okay to delete
+                if (deleteuserCheck(usr, userDao, editor)) {
+                    openMainActivity();
+                }
+
             }
         });
 
@@ -176,11 +181,43 @@ public class HomeActivity extends AppCompatActivity {
         binding.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Close both dialog menus
-                deleteDialog.dismiss();
-                exitDialog.dismiss();
+                dialog.dismiss();
             }
         });
+    }
+
+    /**
+     * Check if it's okay to delete this user
+     */
+    public boolean deleteuserCheck(String usr, UserDao userDao, SharedPreferences.Editor editor) {
+
+        //Create Toast
+        Toast toast = new Toast(this);
+        TextView tv = new TextView(this);
+        Typeface font = ResourcesCompat.getFont(this, R.font.arcade_classic);
+
+        //Customize Toast
+        tv.setTypeface(font);
+        tv.setTextColor(Color.rgb(210, 43, 43));
+        tv.setTextSize(15);
+
+        //Check if predefined user
+        if (usr.equals("testuser1") || usr.equals("admin2")) {
+            tv.setText("Predefined user");
+            toast.setView(tv);
+            toast.show();
+            return false;
+        } else {
+            //Delete user
+            logout(editor);
+            userDao.deleteUser(userDao.findByUsername(usr));
+            //Set message
+            tv.setTextColor(Color.rgb(60, 179, 113));
+            tv.setText("Account Deleted");
+            toast.setView(tv);
+            toast.show();
+            return true;
+        }
     }
 
     /**
