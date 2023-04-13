@@ -22,4 +22,5 @@
     <string name="digits">ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_info">uid: 1 | Admin: false\nusr: testuser1\npwd: testuser1\n\nuid: 2 | Admin: true\nusr: Admin2\n pwd: admin2</string>
 </resources>

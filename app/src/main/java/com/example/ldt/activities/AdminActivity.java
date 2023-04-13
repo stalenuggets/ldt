@@ -13,8 +13,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +29,12 @@ import com.example.ldt.databinding.DialogCreateNewAdminBinding;
 import com.example.ldt.databinding.DialogDeleteAcctConfirmBinding;
 import com.example.ldt.databinding.DialogDeleteUserBinding;
 import com.example.ldt.databinding.DialogManageUsersBinding;
+import com.example.ldt.databinding.DialogUserInfoBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.User;
 import com.example.ldt.db.UserDao;
+
+import org.w3c.dom.Text;
 
 /**
  * @author Erika Iwata
@@ -90,6 +95,21 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     /**
+     * Logout current user
+     */
+    public void logout(SharedPreferences.Editor editor) {
+        editor.clear().apply();
+    }
+
+    /**
+     * Open Home Activity
+     */
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * Open Manage Users Dialog
      */
     public void openManageUsersDialog(UserDao userDao, SharedPreferences.Editor editor) {
@@ -127,6 +147,49 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dialog.dismiss();
                 openDeleteUserDialog(userDao, editor);
+            }
+        });
+
+        //Click - Look up user info
+        binding.btnLookUpUserInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                openLookUpUserDialog(userDao);
+            }
+        });
+    }
+
+    /**
+     * Open Look Up User Info Dialog
+     */
+    public void openLookUpUserDialog(UserDao userDao) {
+        //Open Dialog setup
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        DialogUserInfoBinding binding = DialogUserInfoBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        //Customize dialog popup
+        dialogBuilder.setView(view);
+        Dialog dialog = dialogBuilder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        //Read from userDao
+        String userInfo = "";
+        for (User user: userDao.getAllUsers()) {
+            userInfo += user.toString();
+        }
+
+        //Set new text view
+        TextView tvUserInfo = (TextView) binding.tvUserInfo;
+        tvUserInfo.setText(userInfo);
+
+        //Click - Close window
+        binding.btnCloseWindow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
     }
@@ -284,21 +347,6 @@ public class AdminActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    /**
-     * Open Home Activity
-     */
-    private void openHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Logout current user
-     */
-    public void logout(SharedPreferences.Editor editor) {
-        editor.clear().apply();
     }
 
     /**

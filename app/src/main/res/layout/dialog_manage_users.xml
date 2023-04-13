@@ -67,10 +67,10 @@
         android:textColor="@color/red"
         android:textSize="15sp" />
 
-    <!--Button for Delete Account-->
+    <!--Button for Look Up User Info-->
 
     <Button
-        android:id="@+id/btn_delete_account"
+        android:id="@+id/btn_look_up_user_info"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

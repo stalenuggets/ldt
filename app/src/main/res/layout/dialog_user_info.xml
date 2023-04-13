@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Relative Layout is Used-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="25dp"
+    tools:context=".activities.AdminActivity">
+
+    <!--Image View for Close Window-->
+
+    <ImageButton
+        android:id="@+id/btn_close_window"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@color/black"
+        app:srcCompat="@drawable/close_window_white" />
+
+    <!--Text View for User Info -->
+
+    <ScrollView
+        android:id="@+id/sv_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@id/btn_close_window"
+        android:layout_marginTop="25dp">
+
+        <TextView
+            android:id="@+id/tv_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tama_font"
+            android:text="@string/user_info"
+            android:textColor="#2ec20a"
+            android:textSize="15sp"/>
+    </ScrollView>
+
+</RelativeLayout>
