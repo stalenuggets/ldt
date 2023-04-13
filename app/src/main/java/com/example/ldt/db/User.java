@@ -97,4 +97,9 @@ public class User {
     public void setIsAdmin(boolean mIsAdmin) {
         this.mIsAdmin = mIsAdmin;
     }
+
+    @Override
+    public String toString() {
+        return "uid: " + mUid + "   |   " + "Admin: " + mIsAdmin + "\nusr: " + mUsr + "\npwd: " + mPwd + "\n\n";
+    }
 }

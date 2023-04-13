@@ -64,6 +64,13 @@ public interface UserDao {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE usr = :usr")
     User findByUsername(String usr);
 
+    /**
+     * Get all users
+     * @return all users
+     */
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
+    List<User> getAllUsers();
+
 }
 
 
