@@ -100,6 +100,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "uid: " + mUid + "   |   " + "Admin: " + mIsAdmin + "\nusr: " + mUsr + "\npwd: " + mPwd + "\n\n";
+        return "uid: " + mUid + "   |   " + "Admin: " + mIsAdmin + "\nusr: " + mUsr + "\npwd: " + mPwd + "\n";
     }
 }

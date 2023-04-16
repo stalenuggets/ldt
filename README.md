@@ -16,7 +16,8 @@ This is an android application of a tamagotchi clone.
 Required Use Cases:
 - [X] Predefined Users
 - [X] Persistence
-- [X] Add a User
+- [X] Add Non-Admin User
+- [X] Add Admin user
 - [X] Delete a User
 
 Additional Use Cases (Mostly based on [User Manual](assets/instructions.png)):
@@ -29,7 +30,6 @@ Additional Use Cases (Mostly based on [User Manual](assets/instructions.png)):
 - [ ] Discipline
 - [ ] Attention
 - [ ] Set Tamagotchi Rarity
-- [X] Add Admin user
 
 See also: [Project 2: Use Case Document](https://docs.google.com/document/d/1dKzxhwV3vJF8Jh_HL8r1ABE1OW-fONaGkUaXyQGTOvY/edit#)
 
@@ -52,4 +52,4 @@ UserDao.java
 ```
 
 ## Directions and Grading Rubric
-Review the following: [Project 2: Android Application](https://docs.google.com/document/d/11b4FGL7AFz1h61ElDy7lOoifnz2GdMy54rca-w9wrMU/edit?usp=sharing)
+Review the following: [Project 2: Android Application](https://docs.google.com/document/d/1Mgs8vdAzWsoyfGcN1-Zbcl-SQcUXEG9kUlzFaEeyLP0/edit?usp=sharing)
