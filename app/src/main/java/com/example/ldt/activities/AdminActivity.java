@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -175,10 +176,20 @@ public class AdminActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
-        //Read from userDao
+        //Initialize variables for userDao for loop
         String userInfo = "";
+        int i = 1;
+
+        //Read from userDao
         for (User user: userDao.getAllUsers()) {
             userInfo += user.toString();
+
+            //Add line at the bottom of each entry (Except for the last entry)
+            if (i < userDao.getAllUsers().size()) {
+                userInfo += "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+            }
+
+            i++;
         }
 
         //Set new text view
@@ -392,6 +403,7 @@ public class AdminActivity extends AppCompatActivity {
             toast.setView(tv);
             toast.show();
             return false;
+        //Update user isAdmin
         } else {
             user.setIsAdmin(true);
             userDao.updateUsers(user);
@@ -424,13 +436,13 @@ public class AdminActivity extends AppCompatActivity {
             toast.setView(tv);
             toast.show();
             return false;
-            //Check if username is already taken
+        //Check if username is already taken
         } else if (userDao.getAllUsernames().contains(usr)) {
             tv.setText("Username already taken");
             toast.setView(tv);
             toast.show();
             return false;
-            //Add user to database
+        //Add user to database
         } else {
             userDao.insertUsers(new User(usr, pwd, true));
             tv.setTextColor(Color.rgb(60,179,113));

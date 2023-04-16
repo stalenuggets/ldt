@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/tama_font"
             android:text="@string/user_info"
-            android:textColor="#2ec20a"
+            android:textColor="#50c878"
             android:textSize="15sp"/>
     </ScrollView>
 
