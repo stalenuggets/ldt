@@ -27,7 +27,7 @@
 
         <ImageView
             android:id="@+id/iv_middle_screen"
-            android:layout_width="350dp"
+            android:layout_width="342dp"
             android:layout_height="202dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="71dp" />
@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="80dp"
             android:layout_alignBottom="@id/iv_health"
-            android:src="@drawable/egg1" />
+            android:src="@drawable/egg2" />
         -->
 
         <!--Image View for Feed Button-->

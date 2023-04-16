@@ -3,7 +3,6 @@
 <!--Animation List for Egg Idle Animation-->
 
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:id="@+id/animation_idle_egg"
     android:oneshot="false">
 
@@ -11,15 +10,13 @@
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg1">
-    </item>
+        android:drawable="@drawable/egg1_bg"/>
 
 
     <!--Item: Egg 2-->
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg2">
-    </item>
+        android:drawable="@drawable/egg2_bg"/>
 
 </animation-list>
