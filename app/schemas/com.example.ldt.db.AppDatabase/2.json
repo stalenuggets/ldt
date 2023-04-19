@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "8b0e6b1b548d406551250da40f1be530",
+    "version": 2,
+    "identityHash": "7de25e7b4bfc64d84eac9699c78a6927",
     "entities": [
       {
         "tableName": "user_table",
@@ -44,17 +44,17 @@
       },
       {
         "tableName": "health_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `hungry` INTEGER NOT NULL, `happy` INTEGER NOT NULL, `discipline` INTEGER NOT NULL, `isAsleep` INTEGER NOT NULL, `isMisbehaving` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT, `hungry` INTEGER NOT NULL, `happy` INTEGER NOT NULL, `discipline` INTEGER NOT NULL, `isAsleep` INTEGER NOT NULL, `isMisbehaving` INTEGER NOT NULL)",
         "fields": [
           {
-            "fieldPath": "mUid",
-            "columnName": "uid",
+            "fieldPath": "mId",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "mName",
-            "columnName": "name",
+            "fieldPath": "mType",
+            "columnName": "type",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -92,39 +92,7 @@
         "primaryKey": {
           "autoGenerate": true,
           "columnNames": [
-            "uid"
-          ]
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "tamadex_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tama_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `rarity` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "mTamaId",
-            "columnName": "tama_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mName",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "mRarity",
-            "columnName": "rarity",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": true,
-          "columnNames": [
-            "tama_id"
+            "id"
           ]
         },
         "indices": [],
@@ -134,7 +102,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b0e6b1b548d406551250da40f1be530')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7de25e7b4bfc64d84eac9699c78a6927')"
     ]
   }
 }

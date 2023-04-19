@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--Animation List for Egg Idle Animation-->
-
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-android:oneshot="false">
-
-    <!--Item: Egg 1-->
+    android:oneshot="false">
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg1_bg"/>
-
-
-    <!--Item: Egg 2-->
+        android:drawable="@drawable/tarakotchi_idle1" />
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg2_bg"/>
+        android:drawable="@drawable/tarakotchi_idle2" />
 
 </animation-list>

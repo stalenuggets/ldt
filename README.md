@@ -40,14 +40,14 @@ See also: [Project 2: Use Case Document](https://docs.google.com/document/d/1dKz
 ## Software Engineering
 This section describes some of the software engineering techniques used for the design and development of this program.
 
-Firstly, it performs CRUD operations using the Room persistence library on Android Studio. Room provides an abstraction layer over SQLite to store persisting data locally. This was used to store user info, tamagotchi rarity, and tamagotchi health stats in the following files:
+Firstly, it performs CRUD operations using the Room persistence library on Android Studio. Room provides an abstraction layer over SQLite to store persisting data locally. This was used to store user info, tamagotchi tamadex, and tamagotchi health stats in the following files:
 ```
 AppDatabase.java
 Health.java
-HealthDao.java
 Rarity.java
 RarityDao.java
 User.java
+UserAndHealth.java
 UserDao.java
 ```
 

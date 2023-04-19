@@ -18,6 +18,8 @@ import java.util.List;
 @Dao
 public interface UserDao {
 
+    //----------USER-----------
+
     @Insert
     void insertUsers(User... user);
 
@@ -26,6 +28,19 @@ public interface UserDao {
 
     @Delete
     void deleteUser(User user);
+
+    //----------HEALTH---------
+
+    @Insert
+    void insertHealth(Health... health);
+
+    @Update
+    void updateHealth(Health... health);
+
+    @Delete
+    void deleteHealth(Health health);
+
+    //-----------------------------QUERIES FOR USER-------------------------------
 
     /**
      * get all user id
@@ -70,6 +85,18 @@ public interface UserDao {
      */
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE)
     List<User> getAllUsers();
+
+    //---------------------------QUERIES FOR HEALTH-----------------------------
+
+    /**
+     * Get all tamagotchi health stats
+     * @return health stats of all tamagotchis
+     */
+    @Query("SELECT * FROM " + AppDatabase.HEALTH_TABLE)
+    List<Health> getAllHealth();
+
+    @Query("SELECT * FROM " + AppDatabase.HEALTH_TABLE + " WHERE uid = :uid")
+    Health findById(int uid);
 
 }
 

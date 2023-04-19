@@ -47,4 +47,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp" />
 
+    <!--Text View for Egg Hatching Timer-->
+
+    <TextView
+        android:id="@+id/egg_hatching_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tama_font"
+        android:textSize="20sp"
+        android:layout_below="@id/fragmentContainerView"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

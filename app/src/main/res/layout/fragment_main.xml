@@ -28,21 +28,41 @@
         <ImageView
             android:id="@+id/iv_middle_screen"
             android:layout_width="342dp"
-            android:layout_height="202dp"
+            android:layout_height="203dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="71dp" />
+
+        <!--Image View for Middle Screen 2-->
+
+        <ImageView
+            android:id="@+id/iv_middle_screen2"
+            android:layout_width="342dp"
+            android:layout_height="203dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="71dp" />
 
         <!--Image View for Egg-->
 
-        <!--
         <ImageView
             android:id="@+id/iv_egg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="80dp"
+            android:visibility="invisible"
             android:layout_alignBottom="@id/iv_health"
-            android:src="@drawable/egg2" />
+            android:src="@drawable/egg_hatched" />
+
+        <!--Image View for Tamagotchi
+
+        <ImageView
+            android:id="@+id/iv_tamagotchi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            android:layout_alignBottom="@id/iv_health"
+            android:src="@drawable/hanatchi_idle2" />
         -->
 
         <!--Image View for Feed Button-->

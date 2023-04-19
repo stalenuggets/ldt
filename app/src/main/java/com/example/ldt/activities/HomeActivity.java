@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.example.ldt.databinding.ActivityHomeBinding;
 import com.example.ldt.databinding.DialogDeleteAcctConfirmBinding;
 import com.example.ldt.databinding.DialogExitGameBinding;
 import com.example.ldt.db.AppDatabase;
+import com.example.ldt.db.Health;
 import com.example.ldt.db.UserDao;
 
 /**
@@ -36,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     //Declare fields
     private ActivityHomeBinding binding;
     private UserDao userDao;
+    private CountDownTimer eggHatchingTimer;
 
     /**
      * Tells program what to do when this activity is created
@@ -58,6 +61,35 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPref.edit();
         String usr = sharedPref.getString("usr", "");
+
+        //Find health entry corresponding to current user
+        int id = userDao.findByUsername(usr).getUid();
+        Health health = userDao.findById(id);
+
+        //If tamagotchi hasn't hatched yet
+        if (health.getName().equals("Egg")) {
+            //Timer for egg to hatch
+            eggHatchingTimer = new CountDownTimer(10000,1000) {
+
+                @Override
+                public void onTick ( long millisUntilFinished){
+                    //Declare variables
+                    int min = (int) millisUntilFinished / 1000 / 60;
+                    int sec = (int) (millisUntilFinished / 1000) % 60;
+
+                    binding.eggHatchingTimer.setText(min + ":" + sec);
+                    binding.eggHatchingTimer.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onFinish () {
+                    //Make timer disappear
+                    binding.eggHatchingTimer.setVisibility(View.INVISIBLE);
+                }
+
+            }.start();
+        }
+
 
         //Click - Back button
         binding.ivBack.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +114,37 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     } //End onCreate
+
+    /**
+     * Logout current user
+     */
+    public void logout(SharedPreferences.Editor editor) {
+        editor.clear().apply();
+    }
+
+    /**
+     * Open LandingActivity
+     */
+    public void openLandingActivity() {
+        Intent intent = new Intent(this, LandingActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open MainActivity
+     */
+    private void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Open AdminActivity
+     */
+    public void openAdminActivity() {
+        Intent intent = new Intent(this, AdminActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * Open Exit Menu
@@ -170,7 +233,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //Check if user is okay to delete
-                if (deleteuserCheck(usr, userDao, editor)) {
+                if (isValidDeleteUser(usr, userDao, editor)) {
                     openMainActivity();
                 }
 
@@ -189,7 +252,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Check if it's okay to delete this user
      */
-    public boolean deleteuserCheck(String usr, UserDao userDao, SharedPreferences.Editor editor) {
+    public boolean isValidDeleteUser(String usr, UserDao userDao, SharedPreferences.Editor editor) {
 
         //Create Toast
         Toast toast = new Toast(this);
@@ -210,7 +273,9 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             //Delete user
             logout(editor);
+            userDao.deleteHealth(userDao.findById(userDao.findByUsername(usr).getUid()));
             userDao.deleteUser(userDao.findByUsername(usr));
+
             //Set message
             tv.setTextColor(Color.rgb(60, 179, 113));
             tv.setText("Account Deleted");
@@ -218,37 +283,6 @@ public class HomeActivity extends AppCompatActivity {
             toast.show();
             return true;
         }
-    }
-
-    /**
-     * Logout current user
-     */
-    public void logout(SharedPreferences.Editor editor) {
-        editor.clear().apply();
-    }
-
-    /**
-     * Open LandingActivity
-     */
-    public void openLandingActivity() {
-        Intent intent = new Intent(this, LandingActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Open MainActivity
-     */
-    private void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Open AdminActivity
-     */
-    public void openAdminActivity() {
-        Intent intent = new Intent(this, AdminActivity.class);
-        startActivity(intent);
     }
 
 }

@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "8b0e6b1b548d406551250da40f1be530",
+    "version": 3,
+    "identityHash": "82f964c7a8163aa03883a1cbf34db51c",
     "entities": [
       {
         "tableName": "user_table",
@@ -44,8 +44,14 @@
       },
       {
         "tableName": "health_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `hungry` INTEGER NOT NULL, `happy` INTEGER NOT NULL, `discipline` INTEGER NOT NULL, `isAsleep` INTEGER NOT NULL, `isMisbehaving` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`primary_key` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` INTEGER NOT NULL, `type` TEXT, `hungry` INTEGER NOT NULL, `happy` INTEGER NOT NULL, `discipline` INTEGER NOT NULL, `isAsleep` INTEGER NOT NULL, `isMisbehaving` INTEGER NOT NULL)",
         "fields": [
+          {
+            "fieldPath": "mPrimaryKey",
+            "columnName": "primary_key",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "mUid",
             "columnName": "uid",
@@ -53,8 +59,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "mName",
-            "columnName": "name",
+            "fieldPath": "mType",
+            "columnName": "type",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -92,14 +98,14 @@
         "primaryKey": {
           "autoGenerate": true,
           "columnNames": [
-            "uid"
+            "primary_key"
           ]
         },
         "indices": [],
         "foreignKeys": []
       },
       {
-        "tableName": "tamadex_table",
+        "tableName": "rarity_table",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tama_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `rarity` INTEGER NOT NULL)",
         "fields": [
           {
@@ -134,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b0e6b1b548d406551250da40f1be530')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '82f964c7a8163aa03883a1cbf34db51c')"
     ]
   }
 }

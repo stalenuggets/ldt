@@ -32,6 +32,7 @@ import com.example.ldt.databinding.DialogDeleteUserBinding;
 import com.example.ldt.databinding.DialogManageUsersBinding;
 import com.example.ldt.databinding.DialogUserInfoBinding;
 import com.example.ldt.db.AppDatabase;
+import com.example.ldt.db.Health;
 import com.example.ldt.db.User;
 import com.example.ldt.db.UserDao;
 
@@ -183,6 +184,7 @@ public class AdminActivity extends AppCompatActivity {
         //Read from userDao
         for (User user: userDao.getAllUsers()) {
             userInfo += user.toString();
+            userInfo += userDao.findById(user.getUid()).toString();
 
             //Add line at the bottom of each entry (Except for the last entry)
             if (i < userDao.getAllUsers().size()) {
@@ -445,6 +447,7 @@ public class AdminActivity extends AppCompatActivity {
         //Add user to database
         } else {
             userDao.insertUsers(new User(usr, pwd, true));
+            userDao.insertHealth(new Health());
             tv.setTextColor(Color.rgb(60,179,113));
             tv.setText("New User Added");
             toast.setView(tv);
@@ -490,7 +493,9 @@ public class AdminActivity extends AppCompatActivity {
         } else {
             //Delete user
             logout(editor);
+            userDao.deleteHealth(userDao.findById(userDao.findByUsername(usr).getUid()));
             userDao.deleteUser(userDao.findByUsername(usr));
+
             //Set message
             tv.setTextColor(Color.rgb(60, 179, 113));
             tv.setText("Account Deleted");
