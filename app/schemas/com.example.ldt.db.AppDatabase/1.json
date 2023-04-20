@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8b0e6b1b548d406551250da40f1be530",
+    "identityHash": "18bd3be9a9f0349f1fd4bdd1ec6387ed",
     "entities": [
       {
         "tableName": "user_table",
@@ -100,19 +100,13 @@
       },
       {
         "tableName": "tamadex_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tama_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `rarity` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `rarity` INTEGER NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
-          {
-            "fieldPath": "mTamaId",
-            "columnName": "tama_id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "mName",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "mRarity",
@@ -122,9 +116,9 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": true,
+          "autoGenerate": false,
           "columnNames": [
-            "tama_id"
+            "name"
           ]
         },
         "indices": [],
@@ -134,7 +128,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b0e6b1b548d406551250da40f1be530')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '18bd3be9a9f0349f1fd4bdd1ec6387ed')"
     ]
   }
 }

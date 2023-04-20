@@ -34,4 +34,7 @@ public interface TamadexDao {
     @Query("SELECT rarity FROM " + AppDatabase.TAMADEX_TABLE + " ORDER BY rarity ASC")
     List<Integer> getAllRarities();
 
+    @Query("SELECT * FROM " + AppDatabase.TAMADEX_TABLE + " WHERE name = :name")
+    Tamadex findByName(String name);
+
 }

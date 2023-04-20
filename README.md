@@ -29,7 +29,7 @@ Additional Use Cases (Mostly based on [User Manual](assets/instructions.png)):
 - [ ] Health
 - [ ] Discipline
 - [ ] Attention
-- [ ] Set Tamagotchi Rarity
+- [X] Set Tamagotchi Rarity
 
 See also: [Project 2: Use Case Document](https://docs.google.com/document/d/1dKzxhwV3vJF8Jh_HL8r1ABE1OW-fONaGkUaXyQGTOvY/edit#)
 

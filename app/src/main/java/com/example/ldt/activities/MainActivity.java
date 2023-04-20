@@ -152,9 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Check if tamagtochi is already in database
         if (tamadexDao.getAllNames().isEmpty()) {
-            tamadexDao.insertTamadex(tarakotchi);
-            tamadexDao.insertTamadex(hanatchi);
-            tamadexDao.insertTamadex(zuccitchi);
+            tamadexDao.insertTamadex(tarakotchi, hanatchi, zuccitchi);
         }
     }
 

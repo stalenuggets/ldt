@@ -3,7 +3,7 @@
 <!--Relative Layout is Used-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/light_grey"
     android:orientation="vertical"
@@ -21,14 +21,14 @@
     <!--Text view for title-->
 
     <TextView
-        android:id="@+id/tv_set_rarity"
+        android:id="@+id/tv_tama_rarity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/tama_font"
         android:gravity="center_horizontal"
-        android:text="Set tamagotchi rarity"
+        android:text="Set tamagotchi\nrarity"
         android:textColor="@color/black"
         android:textSize="30sp" />
 
@@ -97,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:fontFamily="@font/tama_font"
-                android:hint="34"
                 android:inputType="number"
                 android:maxLength="3"
                 android:textColor="@color/black"
@@ -110,7 +109,6 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:fontFamily="@font/tama_font"
-                android:hint="33"
                 android:inputType="number"
                 android:maxLength="3"
                 android:textColor="@color/black"
@@ -123,7 +121,6 @@
                 android:layout_height="wrap_content"
                 android:ems="3"
                 android:fontFamily="@font/tama_font"
-                android:hint="33"
                 android:inputType="number"
                 android:maxLength="3"
                 android:textColor="@color/black"

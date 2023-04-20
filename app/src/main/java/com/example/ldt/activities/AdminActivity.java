@@ -2,6 +2,7 @@ package com.example.ldt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.room.Query;
 import androidx.room.Room;
 
 import android.app.AlertDialog;
@@ -34,10 +35,14 @@ import com.example.ldt.databinding.DialogManageUsersBinding;
 import com.example.ldt.databinding.DialogUserInfoBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.Health;
+import com.example.ldt.db.Tamadex;
+import com.example.ldt.db.TamadexDao;
 import com.example.ldt.db.User;
 import com.example.ldt.db.UserDao;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 /**
  * @author Erika Iwata
@@ -51,6 +56,7 @@ public class AdminActivity extends AppCompatActivity {
     //Declare fields
     private ActivityAdminBinding binding;
     private UserDao userDao;
+    private TamadexDao tamadexDao;
 
     /**
      * Tells program what to do when this activity is created
@@ -68,6 +74,8 @@ public class AdminActivity extends AppCompatActivity {
         //Build database
         userDao = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries().build().userDao();
+        tamadexDao = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().tamadexDao();
 
         //Get shared preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -124,6 +132,14 @@ public class AdminActivity extends AppCompatActivity {
      * Open Game Config Dialog
      */
     public void openGameConfigDialog() {
+
+        //build database
+        tamadexDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().tamadexDao();
+
+        //TODO
+        Log.d("editText", "Initially: " + tamadexDao.findByName("Tarakotchi").getRarity());
+
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         DialogGameConfigBinding binding = DialogGameConfigBinding.inflate(getLayoutInflater());
@@ -135,11 +151,26 @@ public class AdminActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
+        //Set edit text hint to current rarity
+        binding.etTarakotchi.setHint(tamadexDao.findByName("Tarakotchi").getRarity() + "");
+        binding.etHanatchi.setHint(tamadexDao.findByName("Hanatchi").getRarity() + "");
+        binding.etZuccitchi.setHint(tamadexDao.findByName("Zuccitchi").getRarity() + "");
+
         //Click - Close window
         binding.ivCloseWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+            }
+        });
+
+        //Click - Apply button
+        binding.btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (setRarity(tamadexDao, binding)) {
+                    dialog.dismiss();
+                }
             }
         });
     }
@@ -393,6 +424,77 @@ public class AdminActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * Set rarity of the tamagotchi
+     */
+    public boolean setRarity(TamadexDao tamadexDao, DialogGameConfigBinding binding) {
+
+        //Create Toast
+        Toast toast = new Toast(this);
+        TextView tv = new TextView(this);
+        Typeface font = ResourcesCompat.getFont(this, R.font.arcade_classic);
+
+        //Customize Toast
+        tv.setTypeface(font);
+        tv.setTextColor(Color.rgb(210, 43, 43));
+        tv.setTextSize(15);
+
+        //Set varaibles
+        String etTarakotchi = binding.etTarakotchi.getText().toString();
+        String etHanatchi = binding.etHanatchi.getText().toString();
+        String etZuccitchi = binding.etZuccitchi.getText().toString();
+
+        if (!etTarakotchi.isEmpty() && !etHanatchi.isEmpty() && !etZuccitchi.isEmpty()) {
+            //Set variables
+            int tarakotchiRarity = Integer.parseInt(etTarakotchi);
+            int hanatchiRarity = Integer.parseInt(etHanatchi);
+            int zuccitchiRarity = Integer.parseInt(etZuccitchi);
+
+            //TODO
+            Log.d("editText", "Edit text: " + tarakotchiRarity);
+
+            //If the sum of all rarities equals 100
+            if (tarakotchiRarity + hanatchiRarity + zuccitchiRarity == 100) {
+
+                //Set rarity
+//                tamadexDao.findByName("Tarakotchi").setRarity(tarakotchiRarity);
+//                tamadexDao.findByName("Hanatchi").setRarity(hanatchiRarity);
+//                tamadexDao.findByName("Zuccitchi").setRarity(zuccitchiRarity);
+//                tamadexDao.updateTamadex(tamadexDao.findByName("Tarakotchi"), tamadexDao.findByName("Hanatchi"), tamadexDao.findByName("Zuccitchi"));
+
+                Tamadex tarakotchi = new Tamadex("Tarakotchi", tarakotchiRarity);
+                Tamadex hanatchi = new Tamadex("Hanatchi", hanatchiRarity);
+                Tamadex zuccitchi = new Tamadex("Zuccitchi", zuccitchiRarity);
+                tamadexDao.insertTamadex(tarakotchi, hanatchi, zuccitchi);
+
+                //TODO
+                Log.d("editText", "after update: " + tamadexDao.findByName("Tarakotchi").getRarity());
+
+                //TODO
+                Log.d("editText", "size: " + tamadexDao.getAllNames().size());
+
+                tv.setTextColor(Color.rgb(60,179,113));
+                tv.setText("Successfully reset");
+                toast.setView(tv);
+                toast.show();
+                return true;
+            //Display error message
+            } else {
+                tv.setText("Invalid entry");
+                toast.setView(tv);
+                toast.show();
+                return false;
+            }
+        //Error message for leaving text edit blank
+        } else {
+            tv.setText("Missing required fields");
+            toast.setView(tv);
+            toast.show();
+            return false;
+        }
+
     }
 
     /**

@@ -1,7 +1,10 @@
 package com.example.ldt.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 /**
@@ -14,10 +17,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = AppDatabase.TAMADEX_TABLE)
 public class Tamadex {
 
-    @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "tama_id")
-    private int mTamaId = 0;
-
+    @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "name")
     private String mName;
 
@@ -28,15 +29,6 @@ public class Tamadex {
         this.mName = name;
         this.mRarity = rarity;
     }
-
-    public int getTamaId() {
-        return mTamaId;
-    }
-
-    public void setTamaId(int tamaId) {
-        this.mTamaId = tamaId;
-    }
-
     public String getName() {
         return mName;
     }
