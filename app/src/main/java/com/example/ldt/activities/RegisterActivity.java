@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.ldt.R;
 import com.example.ldt.databinding.ActivityRegisterBinding;
 import com.example.ldt.db.AppDatabase;
+import com.example.ldt.db.Health;
 import com.example.ldt.db.User;
 import com.example.ldt.db.UserDao;
 
@@ -130,6 +131,7 @@ public class RegisterActivity extends AppCompatActivity{
         //Add user to database
         } else {
             userDao.insertUsers(new User(usr, pwd));
+            userDao.insertHealth(new Health());
             return true;
         }
 

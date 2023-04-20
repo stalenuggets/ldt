@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Relative Layout is Used-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <!--Image view for close window-->
+
+    <ImageView
+        android:id="@+id/iv_close_window"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/close_window" />
+
+    <!--Text view for title-->
+
+    <TextView
+        android:id="@+id/tv_tama_rarity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/tama_font"
+        android:gravity="center_horizontal"
+        android:text="Set tamagotchi\nrarity"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <!--Horizontal Linear Layout to put columns side by side-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/columns_set_rarity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <!--Vertical linear layout for tamagotchi names-->
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/column_tamagotchi_names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="13dp">
+
+            <TextView
+                android:id="@+id/tv_tarakotchi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/tama_font"
+                android:text="Tarakotchi"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_hanatchi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/tama_font"
+                android:text="Hanatchi"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_zuccitchi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/tama_font"
+                android:text="Zuccitchi"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <!--Vertical linear layout for edit text column-->
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/column_enter_rarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
+
+            <EditText
+                android:id="@+id/et_tarakotchi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:fontFamily="@font/tama_font"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_hanatchi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:fontFamily="@font/tama_font"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_zuccitchi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:fontFamily="@font/tama_font"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--Text view for Total:-->
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/tama_font"
+        android:text="                                 Total:     100"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <!--Button for apply-->
+
+    <Button
+        android:id="@+id/btn_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/tama_font"
+        android:text="Apply"
+        android:textSize="15sp" />
+
+</LinearLayout>

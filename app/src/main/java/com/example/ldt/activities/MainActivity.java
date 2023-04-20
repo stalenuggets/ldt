@@ -13,6 +13,9 @@ import android.view.View;
 
 import com.example.ldt.databinding.ActivityMainBinding;
 import com.example.ldt.db.AppDatabase;
+import com.example.ldt.db.Health;
+import com.example.ldt.db.Tamadex;
+import com.example.ldt.db.TamadexDao;
 import com.example.ldt.db.User;
 import com.example.ldt.db.UserDao;
 import com.google.android.material.tabs.TabLayout;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     //Declare fields
     private ActivityMainBinding binding;
     private UserDao userDao;
+    private TamadexDao tamadexDao;
 
     /**
      * Tells program what to do when this activity is created
@@ -46,10 +50,15 @@ public class MainActivity extends AppCompatActivity {
         //Build database
         userDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries().build().userDao();
+        tamadexDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().tamadexDao();
 
         //Get shared preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String usr = sharedPref.getString("usr", "loggedOut");
+
+        //Check if tamagotchis are added
+        addTamagotchis(tamadexDao);
 
         //Check if predefined users are added AND user is already logged in
         addPredefinedUsers(userDao);
@@ -128,8 +137,22 @@ public class MainActivity extends AppCompatActivity {
         User admin2 = new User("admin2", "admin2", true);
 
         //If predefined users are NOT in database, add them
-        if (userDao.findByUsername("testuser1") == null && userDao.findByUsername("admin2") == null) {
+        if (userDao.getAllUsers().isEmpty()) {
             userDao.insertUsers(testuser1, admin2);
+            userDao.insertHealth(new Health(), new Health());
+        }
+    }
+
+    public void addTamagotchis(TamadexDao tamadexDao) {
+
+        //Declare tamagotchis
+        Tamadex tarakotchi = new Tamadex("Tarakotchi", 34);
+        Tamadex hanatchi = new Tamadex("Hanatchi", 33);
+        Tamadex zuccitchi = new Tamadex("Zuccitchi", 33);
+
+        //Check if tamagtochi is already in database
+        if (tamadexDao.getAllNames().isEmpty()) {
+            tamadexDao.insertTamadex(tarakotchi, hanatchi, zuccitchi);
         }
     }
 

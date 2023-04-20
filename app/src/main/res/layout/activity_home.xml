@@ -34,7 +34,7 @@
         android:layout_marginEnd="25dp"
         android:clickable="true"
         android:focusable="true"
-        app:srcCompat="@drawable/exit_icon" />
+        app:srcCompat="@drawable/exit_icon_white" />
 
     <!--Fragment Container View-->
 
@@ -46,5 +46,17 @@
         android:layout_below="@id/iv_back"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp" />
+
+    <!--Text View for Egg Hatching Timer-->
+
+    <TextView
+        android:id="@+id/egg_hatching_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tama_font"
+        android:textSize="20sp"
+        android:layout_below="@id/fragmentContainerView"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
