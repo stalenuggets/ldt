@@ -29,6 +29,7 @@ import com.example.ldt.databinding.DialogChooseFromExistingBinding;
 import com.example.ldt.databinding.DialogCreateNewAdminBinding;
 import com.example.ldt.databinding.DialogDeleteAcctConfirmBinding;
 import com.example.ldt.databinding.DialogDeleteUserBinding;
+import com.example.ldt.databinding.DialogGameConfigBinding;
 import com.example.ldt.databinding.DialogManageUsersBinding;
 import com.example.ldt.databinding.DialogUserInfoBinding;
 import com.example.ldt.db.AppDatabase;
@@ -86,6 +87,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //Click - game configuration button
+        binding.btnGameConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGameConfigDialog();
+            }
+        });
+
         //Click - manage existing users button
         binding.btnManageUsers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +118,30 @@ public class AdminActivity extends AppCompatActivity {
     private void openHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Open Game Config Dialog
+     */
+    public void openGameConfigDialog() {
+        //Open Dialog setup
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        DialogGameConfigBinding binding = DialogGameConfigBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        //Customize dialog popup
+        dialogBuilder.setView(view);
+        Dialog dialog = dialogBuilder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        //Click - Close window
+        binding.ivCloseWindow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /**

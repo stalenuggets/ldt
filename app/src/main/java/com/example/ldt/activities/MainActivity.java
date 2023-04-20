@@ -145,15 +145,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void addTamagotchis(TamadexDao tamadexDao) {
 
-        //TODO - Update this
         //Declare tamagotchis
-        Tamadex tarakotchi = new Tamadex("Tarakotchi", 50);
-        Tamadex hanatchi = new Tamadex("Hanatchi", 50);
+        Tamadex tarakotchi = new Tamadex("Tarakotchi", 34);
+        Tamadex hanatchi = new Tamadex("Hanatchi", 33);
+        Tamadex zuccitchi = new Tamadex("Zuccitchi", 33);
 
         //Check if tamagtochi is already in database
         if (tamadexDao.getAllNames().isEmpty()) {
             tamadexDao.insertTamadex(tarakotchi);
             tamadexDao.insertTamadex(hanatchi);
+            tamadexDao.insertTamadex(zuccitchi);
         }
     }
 

@@ -62,8 +62,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="80dp"
             android:layout_alignBottom="@id/iv_health"
-            android:src="@drawable/hanatchi_idle2" />
-        -->
+            android:src="@drawable/zuccitchi_idle2" />
+            -->
+
 
         <!--Image View for Feed Button-->
 
@@ -77,7 +78,7 @@
             android:layout_marginTop="15dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/feed_icon" />
+            app:srcCompat="@drawable/feed_icon_white" />
 
         <!--Image View for Lights Button-->
 
@@ -91,7 +92,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/lights_icon" />
+            app:srcCompat="@drawable/lights_icon_white" />
 
         <!--Image View for Game Button-->
 
@@ -105,7 +106,8 @@
             android:layout_marginEnd="85dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/game_icon" />
+            app:srcCompat="@drawable/game_icon_white" />
+
 
         <!--Image View for Sick Button-->
 
@@ -119,7 +121,7 @@
             android:layout_marginEnd="20dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/sick_icon" />
+            app:srcCompat="@drawable/sick_icon_white" />
 
         <!--Image View for Bathroom Button-->
 
@@ -134,7 +136,7 @@
             android:layout_marginTop="205dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/bathroom_icon" />
+            app:srcCompat="@drawable/bathroom_icon_white" />
 
         <!--Image View for Health Button-->
 
@@ -149,7 +151,7 @@
             android:layout_marginTop="205dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/health_icon" />
+            app:srcCompat="@drawable/health_icon_white" />
 
         <!--Image View for Discipline Button-->
 
@@ -164,7 +166,7 @@
             android:layout_marginEnd="80dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/discipline_icon" />
+            app:srcCompat="@drawable/discipline_icon_white" />
 
         <!--Image View for Attention Button-->
 
@@ -179,7 +181,7 @@
             android:layout_marginEnd="25dp"
             android:clickable="true"
             android:focusable="true"
-            app:srcCompat="@drawable/attention_icon" />
+            app:srcCompat="@drawable/attention_icon_white" />
 
     </RelativeLayout>
 

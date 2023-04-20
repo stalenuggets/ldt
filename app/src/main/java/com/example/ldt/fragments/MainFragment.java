@@ -26,6 +26,7 @@ import com.example.ldt.R;
 import com.example.ldt.databinding.FragmentMainBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.Health;
+import com.example.ldt.db.TamadexDao;
 import com.example.ldt.db.UserDao;
 
 import java.util.Random;
@@ -40,6 +41,7 @@ import java.util.Random;
 public class MainFragment extends Fragment {
 
     private UserDao userDao;
+    private TamadexDao tamadexDao;
 
     public MainFragment() {
         // Required empty public constructor
@@ -79,6 +81,8 @@ public class MainFragment extends Fragment {
         //Build database
         userDao = Room.databaseBuilder(getContext(), AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries().build().userDao();
+        tamadexDao = Room.databaseBuilder(getContext(), AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries().build().tamadexDao();
 
         //Get username
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -91,17 +95,19 @@ public class MainFragment extends Fragment {
 
         //Play idle animation for corresponding tamagotchi
         if (health.getName().equals("Egg")) {
-            eggIdleAnimation(view, binding, health, userDao);
+            eggIdleAnimation(view, binding, health, userDao, tamadexDao);
         } else if (health.getName().equals("Tarakotchi")){
             tarakotchiIdleAnimation(view, binding);
         } else if (health.getName().equals("Hanatchi")) {
             hanatchiIdleAnimation(view, binding);
+        } else if (health.getName().equals("Zuccitchi")) {
+            zuccitchiIdleAnimation(view, binding);
         }
 
         return view;
     }
 
-    public void eggIdleAnimation(View view, FragmentMainBinding binding, Health health, UserDao userDao) {
+    public void eggIdleAnimation(View view, FragmentMainBinding binding, Health health, UserDao userDao, TamadexDao tamadexDao) {
         //Egg idle animation
         binding.ivMiddleScreen.setImageResource(R.drawable.animation_egg_idle);
         AnimationDrawable eggIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen.getDrawable();
@@ -118,7 +124,7 @@ public class MainFragment extends Fragment {
 
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivEgg.setVisibility(View.INVISIBLE);
-            updateTamaType(health, userDao);
+            updateTamaType(health, userDao, tamadexDao);
         }, 11000); // 11 seconds
 
         //Check what type of tamagotchi hatched
@@ -127,20 +133,34 @@ public class MainFragment extends Fragment {
                 tarakotchiIdleAnimation(view, binding);
             } else if (health.getName().equals("Hanatchi")) {
                 hanatchiIdleAnimation(view, binding);
+            } else if (health.getName().equals("Zuccitchi")) {
+                zuccitchiIdleAnimation(view, binding);
             }
         }, 11000); //11 seconds
     }
 
     //TODO - use rarity
-    public void updateTamaType(Health health, UserDao userDao) {
+    public void updateTamaType(Health health, UserDao userDao, TamadexDao tamadexDao) {
 
-        int randNum = new Random().nextInt(2);
+        //Random number from 1 to 100
+        int randNum = new Random().nextInt(100) + 1;
+
+        //Set values
+        int firstRarity = tamadexDao.getAllRarities().get(0);
+        int secondRarity = tamadexDao.getAllRarities().get(1);
+
+        //Set tamagotchi
+        String firstTama = tamadexDao.getAllNames().get(0);
+        String secondTama = tamadexDao.getAllNames().get(1);
+        String thirdTama = tamadexDao.getAllNames().get(2);
 
         //Update tamagotchi type
-        if (randNum == 0) {
-            health.setName("Tarakotchi");
+        if (randNum <= firstRarity) {
+            health.setName(firstTama);
+        } else if (randNum <= secondRarity) {
+            health.setName(secondTama);
         } else {
-            health.setName("Hanatchi");
+            health.setName(thirdTama);
         }
         userDao.updateHealth(health);
     }
@@ -157,5 +177,12 @@ public class MainFragment extends Fragment {
         binding.ivMiddleScreen2.setImageResource(R.drawable.animation_hanatchi_idle);
         AnimationDrawable hanatchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
         hanatchiIdleAnimation.start();
+    }
+
+    public void zuccitchiIdleAnimation(View view, FragmentMainBinding binding) {
+        //Zuccitchi idle animation
+        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_zuccitchi_idle);
+        AnimationDrawable zuccitchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
+        zuccitchiIdleAnimation.start();
     }
 }

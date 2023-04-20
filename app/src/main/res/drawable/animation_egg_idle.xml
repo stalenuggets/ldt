@@ -9,13 +9,13 @@ android:oneshot="false">
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg1_bg"/>
+        android:drawable="@drawable/egg1"/>
 
 
     <!--Item: Egg 2-->
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg2_bg"/>
+        android:drawable="@drawable/egg2"/>
 
 </animation-list>

@@ -34,7 +34,7 @@
         android:layout_marginEnd="25dp"
         android:clickable="true"
         android:focusable="true"
-        app:srcCompat="@drawable/exit_icon" />
+        app:srcCompat="@drawable/exit_icon_white" />
 
     <!--Fragment Container View-->
 

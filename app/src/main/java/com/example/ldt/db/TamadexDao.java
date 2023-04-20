@@ -3,6 +3,7 @@ package com.example.ldt.db;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @Dao
 public interface TamadexDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTamadex(Tamadex... tamadex);
 
     @Update
@@ -27,7 +28,10 @@ public interface TamadexDao {
     @Delete
     void deleteTamadex(Tamadex tamadex);
 
-    @Query("SELECT name FROM " + AppDatabase.TAMADEX_TABLE)
+    @Query("SELECT name FROM " + AppDatabase.TAMADEX_TABLE + " ORDER BY rarity ASC")
     List<String> getAllNames();
+
+    @Query("SELECT rarity FROM " + AppDatabase.TAMADEX_TABLE + " ORDER BY rarity ASC")
+    List<Integer> getAllRarities();
 
 }
