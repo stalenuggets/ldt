@@ -128,19 +128,30 @@ public class HomeActivity extends AppCompatActivity {
         binding.ivHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Build database
+                UserDao userDao2 = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
+                        .allowMainThreadQueries().build().userDao();
 
-                //If first click go to health screen
-                if (firstClick) {
-                    firstClick = false;
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, HealthFragment.class, null)
-                            .addToBackStack(null).commit();
-                //If 2nd click exit health screen
-                } else {
-                    firstClick = true;
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, MainFragment.class, null)
-                            .addToBackStack(null).commit();
+                //Find health entry corresponding to current user
+                int id2 = userDao2.findByUsername(usr).getUid();
+                Health health2 = userDao2.findByUid(id2);
+
+                //If tamagotchi has hatched
+                if (!health2.getName().equals("Egg")) {
+
+                    //If first click go to health screen
+                    if (firstClick) {
+                        firstClick = false;
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, HealthFragment.class, null)
+                                .addToBackStack(null).commit();
+                        //If 2nd click exit health screen
+                    } else {
+                        firstClick = true;
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, MainFragment.class, null)
+                                .addToBackStack(null).commit();
+                    }
                 }
             }
         });
