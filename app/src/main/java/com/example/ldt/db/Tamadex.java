@@ -29,6 +29,7 @@ public class Tamadex {
         this.mName = name;
         this.mRarity = rarity;
     }
+
     public String getName() {
         return mName;
     }

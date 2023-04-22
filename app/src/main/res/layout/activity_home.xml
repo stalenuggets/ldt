@@ -16,7 +16,7 @@
         android:id="@+id/iv_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@id/fragmentContainerView"
+        android:layout_alignStart="@id/iv_background"
         android:layout_marginStart="25dp"
         android:layout_marginTop="100dp"
         android:clickable="true"
@@ -29,23 +29,155 @@
         android:id="@+id/iv_exit"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignEnd="@id/fragmentContainerView"
+        android:layout_alignEnd="@id/iv_background"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
         android:clickable="true"
         android:focusable="true"
         app:srcCompat="@drawable/exit_icon_white" />
 
-    <!--Fragment Container View-->
+    <!--Relative Layout is Used-->
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.ldt.fragments.MainFragment"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/iv_background"
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_below="@id/iv_back"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:background="@drawable/background"
+        tools:context=".activities.HomeActivity">
+
+        <!--Image View for Feed Button-->
+
+        <ImageView
+            android:id="@+id/iv_feed"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/feed_icon_white" />
+
+        <!--Fragment Container View-->
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="com.example.ldt.fragments.MainFragment"
+            android:layout_width="350dp"
+            android:layout_height="203dp"
+            android:layout_below="@id/iv_feed"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            tools:layout="@layout/fragment_main" />
+
+        <!--Image View for Lights Button-->
+
+        <ImageView
+            android:id="@+id/iv_lights"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@id/iv_feed"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/lights_icon_white" />
+
+        <!--Image View for Game Button-->
+
+        <ImageView
+            android:id="@+id/iv_game"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignEnd="@id/iv_sick"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="85dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/game_icon_white" />
+
+
+        <!--Image View for Sick Button-->
+
+        <ImageView
+            android:id="@+id/iv_sick"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/sick_icon_white" />
+
+        <!--Image View for Bathroom Button-->
+
+        <ImageView
+            android:id="@+id/iv_bathroom"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_feed"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="205dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/bathroom_icon_white" />
+
+        <!--Image View for Health Button-->
+
+        <ImageView
+            android:id="@+id/iv_health"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_lights"
+            android:layout_alignStart="@id/iv_bathroom"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="205dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/health_icon_white" />
+
+        <!--Image View for Discipline Button-->
+
+        <ImageView
+            android:id="@+id/iv_discipline"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_game"
+            android:layout_alignEnd="@id/iv_attention"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="80dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/discipline_icon_white" />
+
+        <!--Image View for Attention Button-->
+
+        <ImageView
+            android:id="@+id/iv_attention"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/iv_sick"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="25dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:srcCompat="@drawable/attention_icon_white" />
+
+    </RelativeLayout>
 
     <!--Text View for Egg Hatching Timer-->
 
@@ -53,10 +185,10 @@
         android:id="@+id/egg_hatching_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/tama_font"
-        android:textSize="20sp"
-        android:layout_below="@id/fragmentContainerView"
+        android:layout_below="@id/iv_background"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"/>
+        android:fontFamily="@font/tama_font"
+        android:textSize="20sp" />
 
 </RelativeLayout>

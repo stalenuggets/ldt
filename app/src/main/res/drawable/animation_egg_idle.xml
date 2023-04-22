@@ -3,19 +3,25 @@
 <!--Animation List for Egg Idle Animation-->
 
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-android:oneshot="false">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:oneshot="false">
 
     <!--Item: Egg 1-->
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg1"/>
+        android:drawable="@drawable/egg1">
+        <scale android:scaleGravity="fill" />
+    </item>
 
 
     <!--Item: Egg 2-->
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg2"/>
+        android:drawable="@drawable/egg2">
+        <scale android:scaleGravity="fill" />
+    </item>
 
 </animation-list>

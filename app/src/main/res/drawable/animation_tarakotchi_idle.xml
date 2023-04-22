@@ -4,10 +4,14 @@
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/tarakotchi_idle1" />
+        android:drawable="@drawable/tarakotchi_idle1">
+        <scale android:scaleGravity="fill" />
+    </item>
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/tarakotchi_idle2" />
+        android:drawable="@drawable/tarakotchi_idle2">
+        <scale android:scaleGravity="fill" />
+    </item>
 
 </animation-list>
