@@ -34,7 +34,11 @@ Additional Use Cases (Mostly based on [User Manual](assets/instructions.png)):
 See also: [Project 2: Use Case Document](https://docs.google.com/document/d/1dKzxhwV3vJF8Jh_HL8r1ABE1OW-fONaGkUaXyQGTOvY/edit#)
 
 ## Video Demonstration
-[Insert Youtube Link]
+<div align = "left">
+    <a href = "https://youtu.be/23sOmdpF1oA">
+    <img src = yt%20thumbnail.png>
+    </a>
+</div>
 
 
 ## Software Engineering
