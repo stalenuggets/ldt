@@ -26,7 +26,7 @@ Additional Use Cases (Mostly based on [User Manual](assets/instructions.png)):
 - [ ] Game
 - [ ] Sick/Care
 - [ ] Bathroom
-- [ ] Health
+- [X] Health
 - [ ] Discipline
 - [ ] Attention
 - [X] Set Tamagotchi Rarity
