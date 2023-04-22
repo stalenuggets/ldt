@@ -36,7 +36,7 @@ See also: [Project 2: Use Case Document](https://docs.google.com/document/d/1dKz
 ## Video Demonstration
 <div align = "left">
     <a href = "https://youtu.be/23sOmdpF1oA">
-    <img src = yt%20thumbnail.png>
+    <img src = yt%20thumbnail.png width = 600>
     </a>
 </div>
 
