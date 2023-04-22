@@ -1,5 +1,7 @@
 package com.example.ldt.activities;
 
+import static android.os.Looper.getMainLooper;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
 
 import com.example.ldt.R;
@@ -25,6 +29,8 @@ import com.example.ldt.databinding.DialogExitGameBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.Health;
 import com.example.ldt.db.UserDao;
+import com.example.ldt.fragments.HealthFragment;
+import com.example.ldt.fragments.MainFragment;
 
 /**
  * @author Erika Iwata
@@ -38,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
     //Declare fields
     private ActivityHomeBinding binding;
     private UserDao userDao;
-    private CountDownTimer eggHatchingTimer;
+    public static boolean firstClick = true;
 
     /**
      * Tells program what to do when this activity is created
@@ -64,13 +70,12 @@ public class HomeActivity extends AppCompatActivity {
 
         //Find health entry corresponding to current user
         int id = userDao.findByUsername(usr).getUid();
-        Health health = userDao.findById(id);
+        Health health = userDao.findByUid(id);
 
         //If tamagotchi hasn't hatched yet
         if (health.getName().equals("Egg")) {
-            //Timer for egg to hatch
-            eggHatchingTimer = new CountDownTimer(10000,1000) {
-
+            //Timer for egg to hatch (30 sec)
+            CountDownTimer eggHatchingTimer = new CountDownTimer(30000,1000) {
                 @Override
                 public void onTick ( long millisUntilFinished){
                     //Declare variables
@@ -86,10 +91,16 @@ public class HomeActivity extends AppCompatActivity {
                     //Make timer disappear
                     binding.eggHatchingTimer.setVisibility(View.INVISIBLE);
                 }
-
             }.start();
-        }
+            //Make icons black
+            new Handler(getMainLooper()).postDelayed(() -> {
+                binding.ivHealth.setImageResource(R.drawable.health_icon_black);
+            }, 31000); // 31 second
 
+        //If tamagotchi is has already hatched
+        } else {
+            binding.ivHealth.setImageResource(R.drawable.health_icon_black);
+        }
 
         //Click - Back button
         binding.ivBack.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +121,27 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openExitGameDialog(userDao, usr, editor);
+            }
+        });
+
+        //Click - Health icon
+        binding.ivHealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //If first click go to health screen
+                if (firstClick) {
+                    firstClick = false;
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, HealthFragment.class, null)
+                            .addToBackStack(null).commit();
+                //If 2nd click exit health screen
+                } else {
+                    firstClick = true;
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, MainFragment.class, null)
+                            .addToBackStack(null).commit();
+                }
             }
         });
 
@@ -273,7 +305,7 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             //Delete user
             logout(editor);
-            userDao.deleteHealth(userDao.findById(userDao.findByUsername(usr).getUid()));
+            userDao.deleteHealth(userDao.findByUid(userDao.findByUsername(usr).getUid()));
             userDao.deleteUser(userDao.findByUsername(usr));
 
             //Set message

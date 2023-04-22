@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "18bd3be9a9f0349f1fd4bdd1ec6387ed",
+    "identityHash": "6a3a83413d47dd07112bebe2e36493ba",
     "entities": [
       {
         "tableName": "user_table",
@@ -39,7 +39,17 @@
             "uid"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_user_table_usr",
+            "unique": true,
+            "columnNames": [
+              "usr"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_user_table_usr` ON `${TABLE_NAME}` (`usr`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -128,7 +138,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '18bd3be9a9f0349f1fd4bdd1ec6387ed')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6a3a83413d47dd07112bebe2e36493ba')"
     ]
   }
 }

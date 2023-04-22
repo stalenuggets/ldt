@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ldt.R;
+import com.example.ldt.activities.HomeActivity;
+import com.example.ldt.databinding.ActivityHomeBinding;
 import com.example.ldt.databinding.FragmentMainBinding;
 import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.Health;
@@ -40,6 +42,7 @@ import java.util.Random;
 
 public class MainFragment extends Fragment {
 
+    //Declare fields
     private UserDao userDao;
     private TamadexDao tamadexDao;
 
@@ -91,7 +94,7 @@ public class MainFragment extends Fragment {
 
         //Find health entry corresponding to current user
         int id = userDao.findByUsername(usr).getUid();
-        Health health = userDao.findById(id);
+        Health health = userDao.findByUid(id);
 
         //Play idle animation for corresponding tamagotchi
         if (health.getName().equals("Egg")) {
@@ -107,25 +110,37 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Play egg idle animation using timers and handlers
+     * This method calls setTamaType() to determine type of tamagotchi after hatching
+     * @param view
+     * @param binding
+     * @param health
+     * @param userDao
+     * @param tamadexDao
+     */
     public void eggIdleAnimation(View view, FragmentMainBinding binding, Health health, UserDao userDao, TamadexDao tamadexDao) {
         //Egg idle animation
         binding.ivMiddleScreen.setImageResource(R.drawable.animation_egg_idle);
         AnimationDrawable eggIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen.getDrawable();
         eggIdleAnimation.start();
 
+        //Timer for egg idle animation
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivMiddleScreen.clearAnimation();
             binding.ivMiddleScreen.setVisibility(View.INVISIBLE);
-        }, 10000); // 10 second
+        }, 30000); // 30 second
 
+        //Timer for egg hatching animation (Show hatched egg)
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivEgg.setVisibility(View.VISIBLE);
-        }, 10000); // 10 second
+        }, 30000); // 30 second
 
+        //Timer for egg hatching animation (Disappear hatched egg)
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivEgg.setVisibility(View.INVISIBLE);
-            updateTamaType(health, userDao, tamadexDao);
-        }, 11000); // 11 seconds
+            setTamaType(health, userDao, tamadexDao);
+        }, 31000); // 31 seconds
 
         //Check what type of tamagotchi hatched
         new Handler(getMainLooper()).postDelayed(() -> {
@@ -136,11 +151,52 @@ public class MainFragment extends Fragment {
             } else if (health.getName().equals("Zuccitchi")) {
                 zuccitchiIdleAnimation(view, binding);
             }
-        }, 11000); //11 seconds
+        }, 31000); //31 seconds
     }
 
-    //TODO - use rarity
-    public void updateTamaType(Health health, UserDao userDao, TamadexDao tamadexDao) {
+    /**
+     * Plau tarakotchi idle animation
+     * @param view
+     * @param binding
+     */
+    public void tarakotchiIdleAnimation(View view, FragmentMainBinding binding) {
+        //Tarakotchi idle animation
+        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_tarakotchi_idle);
+        AnimationDrawable tarakotchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
+        tarakotchiIdleAnimation.start();
+    }
+
+    /**
+     * Play hanatchi idle animation
+     * @param view
+     * @param binding
+     */
+    public void hanatchiIdleAnimation(View view, FragmentMainBinding binding) {
+        //Hanatchi idle animation
+        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_hanatchi_idle);
+        AnimationDrawable hanatchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
+        hanatchiIdleAnimation.start();
+    }
+
+    /**
+     * Play zuccitchi idle animation
+     * @param view
+     * @param binding
+     */
+    public void zuccitchiIdleAnimation(View view, FragmentMainBinding binding) {
+        //Zuccitchi idle animation
+        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_zuccitchi_idle);
+        AnimationDrawable zuccitchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
+        zuccitchiIdleAnimation.start();
+    }
+
+    /**
+     * Sets the tamagotchi type after it hatches (based on rarity)
+     * @param health
+     * @param userDao
+     * @param tamadexDao
+     */
+    public void setTamaType(Health health, UserDao userDao, TamadexDao tamadexDao) {
 
         //Random number from 1 to 100
         int randNum = new Random().nextInt(100) + 1;
@@ -163,26 +219,5 @@ public class MainFragment extends Fragment {
             health.setName(thirdTama);
         }
         userDao.updateHealth(health);
-    }
-
-    public void tarakotchiIdleAnimation(View view, FragmentMainBinding binding) {
-        //Tarakotchi idle animation
-        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_tarakotchi_idle);
-        AnimationDrawable tarakotchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
-        tarakotchiIdleAnimation.start();
-    }
-
-    public void hanatchiIdleAnimation(View view, FragmentMainBinding binding) {
-        //Hanatchi idle animation
-        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_hanatchi_idle);
-        AnimationDrawable hanatchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
-        hanatchiIdleAnimation.start();
-    }
-
-    public void zuccitchiIdleAnimation(View view, FragmentMainBinding binding) {
-        //Zuccitchi idle animation
-        binding.ivMiddleScreen2.setImageResource(R.drawable.animation_zuccitchi_idle);
-        AnimationDrawable zuccitchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
-        zuccitchiIdleAnimation.start();
     }
 }

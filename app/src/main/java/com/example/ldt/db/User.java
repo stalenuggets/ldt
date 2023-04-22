@@ -1,8 +1,10 @@
 package com.example.ldt.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 /**
@@ -12,7 +14,7 @@ import androidx.room.PrimaryKey;
  * Description: User class for user_table
  */
 
-@Entity(tableName = AppDatabase.USER_TABLE)
+@Entity(tableName = AppDatabase.USER_TABLE, indices = {@Index(value = {"usr"}, unique = true)})
 public class User {
 
     @PrimaryKey(autoGenerate = true)
@@ -28,76 +30,42 @@ public class User {
     @ColumnInfo(name = "isAdmin")
     private boolean mIsAdmin;
 
-    /**
-     * Constructor with 2 param
-     * @param usr username
-     * @param pwd password
-     */
     @Ignore
     public User(String usr, String pwd) {
         this(usr, pwd, false);
     }
 
-    /**
-     * Constructor with 3 param
-     * @param usr username
-     * @param pwd password
-     * @param isAdmin admin status
-     */
     public User(String usr, String pwd, boolean isAdmin) {
         mUsr = usr;
         mPwd = pwd;
         mIsAdmin = isAdmin;
     }
 
-    /**
-     * Getter for user id
-     * @return user id
-     */
     public int getUid() {
         return mUid;
     }
 
-    /**
-     * Getter for username
-     * @return username
-     */
     public String getUsr() {
         return mUsr;
     }
 
-    /**
-     * Getter for password
-     * @return password
-     */
     public String getPwd() {
         return mPwd;
     }
 
-    /**
-     * Getter for admin
-     * @return admin status
-     */
     public boolean isAdmin() {
         return mIsAdmin;
     }
 
-    /**
-     * Setter for user id
-     * @param mUid user id
-     */
-    public void setUid(int mUid) {
-        this.mUid = mUid;
+    public void setUid(int uid) {
+        this.mUid = uid;
     }
 
-    /**
-     * Setter for isAdmin
-     * @param mIsAdmin
-     */
-    public void setIsAdmin(boolean mIsAdmin) {
-        this.mIsAdmin = mIsAdmin;
+    public void setIsAdmin(boolean isAdmin) {
+        this.mIsAdmin = isAdmin;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "uid: " + mUid + "   |   " + "Admin: " + mIsAdmin + "\nusr: " + mUsr + "\npwd: " + mPwd + "\n";

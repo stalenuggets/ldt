@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="203dp">
+
+    <!--Relative Layout is used-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="203dp"
+        android:background="@drawable/screen_middle"
+        android:orientation="horizontal"
+        android:padding="25dp"
+        tools:context=".activities.AdminActivity">
+
+        <!--Text View Column-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:fontFamily="@font/tama_font"
+                android:text="Hungry"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:fontFamily="@font/tama_font"
+                android:text="Happy"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:fontFamily="@font/tama_font"
+                android:text="Discipline"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <!--Image View Column-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingStart="25dp">
+
+            <!--Hungry Hearts-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+            </LinearLayout>
+
+            <!--Happy Hearts-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+                <ImageView
+                    android:layout_width="33dp"
+                    android:layout_height="27dp"
+                    android:src="@drawable/heart_filled" />
+
+            </LinearLayout>
+
+            <!--Discipline Meter-->
+
+            <ImageView
+                android:layout_width="135dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/discipline4" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -26,19 +26,19 @@ public class Health{
     private String mName = "Egg";
 
     @ColumnInfo(name = "hungry")
-    private int mHungry;
+    private int mHungry = 4;
 
     @ColumnInfo(name = "happy")
-    private int mHappy;
+    private int mHappy = 4;
 
     @ColumnInfo(name = "discipline")
-    private int mDiscipline;
+    private int mDiscipline = 4;
 
     @ColumnInfo(name = "isAsleep")
-    private boolean mIsAsleep;
+    private boolean mIsAsleep = false;
 
     @ColumnInfo(name = "isMisbehaving")
-    private boolean mIsMisbehaving;
+    private boolean mIsMisbehaving = false;
 
     public int getUid() {
         return mUid;

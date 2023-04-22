@@ -50,7 +50,7 @@ public interface UserDao {
     void deleteHealth(Health health);
 
     @Query("SELECT * FROM " + AppDatabase.HEALTH_TABLE + " WHERE uid = :uid")
-    Health findById(int uid);
+    Health findByUid(int uid);
 
 }
 

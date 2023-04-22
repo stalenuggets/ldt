@@ -107,7 +107,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.btnManageUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openManageUsersDialog(userDao, editor);
+                openManageUsersDialog(userDao, editor, usr);
             }
         });
 
@@ -129,16 +129,17 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     /**
+     * Open Main Activity
+     */
+    private void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * Open Game Config Dialog
      */
     public void openGameConfigDialog() {
-
-        //build database
-        tamadexDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries().build().tamadexDao();
-
-        //TODO
-        Log.d("editText", "Initially: " + tamadexDao.findByName("Tarakotchi").getRarity());
 
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -178,7 +179,7 @@ public class AdminActivity extends AppCompatActivity {
     /**
      * Open Manage Users Dialog
      */
-    public void openManageUsersDialog(UserDao userDao, SharedPreferences.Editor editor) {
+    public void openManageUsersDialog(UserDao userDao, SharedPreferences.Editor editor, String usr) {
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         DialogManageUsersBinding binding = DialogManageUsersBinding.inflate(getLayoutInflater());
@@ -212,7 +213,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                openDeleteUserDialog(userDao, editor);
+                openDeleteUserDialog(userDao, editor, usr);
             }
         });
 
@@ -248,7 +249,7 @@ public class AdminActivity extends AppCompatActivity {
         //Read from userDao
         for (User user: userDao.getAllUsers()) {
             userInfo += user.toString();
-            userInfo += userDao.findById(user.getUid()).toString();
+            userInfo += userDao.findByUid(user.getUid()).toString();
 
             //Add line at the bottom of each entry (Except for the last entry)
             if (i < userDao.getAllUsers().size()) {
@@ -392,7 +393,7 @@ public class AdminActivity extends AppCompatActivity {
     /**
      * Open Delete User Dialog
      */
-    public void openDeleteUserDialog(UserDao userDao, SharedPreferences.Editor editor) {
+    public void openDeleteUserDialog(UserDao userDao, SharedPreferences.Editor editor, String usrParam) {
         //Open Dialog setup
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         DialogDeleteUserBinding binding = DialogDeleteUserBinding.inflate(getLayoutInflater());
@@ -420,7 +421,12 @@ public class AdminActivity extends AppCompatActivity {
                 String usr = binding.etUsr.getText().toString();
 
                 if (isValidDeleteUser(userDao, usr, editor)) {
-                    dialog.dismiss();
+                    //If user being deleted is current user
+                    if (usr.equals(usrParam)) {
+                        openMainActivity();
+                    } else {
+                        dialog.dismiss();
+                    }
                 }
             }
         });
@@ -446,6 +452,7 @@ public class AdminActivity extends AppCompatActivity {
         String etHanatchi = binding.etHanatchi.getText().toString();
         String etZuccitchi = binding.etZuccitchi.getText().toString();
 
+        //Check if edit text is empty before parsing it as integer
         if (!etTarakotchi.isEmpty() && !etHanatchi.isEmpty() && !etZuccitchi.isEmpty()) {
             //Set variables
             int tarakotchiRarity = Integer.parseInt(etTarakotchi);
@@ -453,7 +460,7 @@ public class AdminActivity extends AppCompatActivity {
             int zuccitchiRarity = Integer.parseInt(etZuccitchi);
 
             //TODO
-            Log.d("editText", "Edit text: " + tarakotchiRarity);
+            Log.d("debug", "Edit text: " + tarakotchiRarity);
 
             //If the sum of all rarities equals 100
             if (tarakotchiRarity + hanatchiRarity + zuccitchiRarity == 100) {
@@ -464,30 +471,30 @@ public class AdminActivity extends AppCompatActivity {
 //                tamadexDao.findByName("Zuccitchi").setRarity(zuccitchiRarity);
 //                tamadexDao.updateTamadex(tamadexDao.findByName("Tarakotchi"), tamadexDao.findByName("Hanatchi"), tamadexDao.findByName("Zuccitchi"));
 
+                //Create new tamadex entries with the new rarities
                 Tamadex tarakotchi = new Tamadex("Tarakotchi", tarakotchiRarity);
                 Tamadex hanatchi = new Tamadex("Hanatchi", hanatchiRarity);
                 Tamadex zuccitchi = new Tamadex("Zuccitchi", zuccitchiRarity);
                 tamadexDao.insertTamadex(tarakotchi, hanatchi, zuccitchi);
 
                 //TODO
-                Log.d("editText", "after update: " + tamadexDao.findByName("Tarakotchi").getRarity());
+                Log.d("debug", "after update: " + tamadexDao.findByName("Tarakotchi").getRarity());
+                Log.d("debug", "size: " + tamadexDao.getAllNames().size());
 
-                //TODO
-                Log.d("editText", "size: " + tamadexDao.getAllNames().size());
-
+                //Display toast
                 tv.setTextColor(Color.rgb(60,179,113));
                 tv.setText("Successfully reset");
                 toast.setView(tv);
                 toast.show();
                 return true;
-            //Display error message
+            //Error message when input sum is NOT 100
             } else {
                 tv.setText("Invalid entry");
                 toast.setView(tv);
                 toast.show();
                 return false;
             }
-        //Error message for leaving text edit blank
+        //Error message for blank input
         } else {
             tv.setText("Missing required fields");
             toast.setView(tv);
@@ -628,7 +635,7 @@ public class AdminActivity extends AppCompatActivity {
         } else {
             //Delete user
             logout(editor);
-            userDao.deleteHealth(userDao.findById(userDao.findByUsername(usr).getUid()));
+            userDao.deleteHealth(userDao.findByUid(userDao.findByUsername(usr).getUid()));
             userDao.deleteUser(userDao.findByUsername(usr));
 
             //Set message
