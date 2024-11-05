@@ -12,7 +12,6 @@
     <item
         android:duration="1000"
         android:drawable="@drawable/egg1">
-        <scale android:scaleGravity="fill" />
     </item>
 
 
@@ -21,7 +20,6 @@
     <item
         android:duration="1000"
         android:drawable="@drawable/egg2">
-        <scale android:scaleGravity="fill" />
     </item>
 
 </animation-list>

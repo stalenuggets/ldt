@@ -129,18 +129,18 @@ public class MainFragment extends Fragment {
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivMiddleScreen.clearAnimation();
             binding.ivMiddleScreen.setVisibility(View.INVISIBLE);
-        }, 30000); // 30 second
+        }, 5000); // 5 second
 
         //Timer for egg hatching animation (Show hatched egg)
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivEgg.setVisibility(View.VISIBLE);
-        }, 30000); // 30 second
+        }, 5000); // 5 second
 
         //Timer for egg hatching animation (Disappear hatched egg)
         new Handler(getMainLooper()).postDelayed(() -> {
             binding.ivEgg.setVisibility(View.INVISIBLE);
             setTamaType(health, userDao, tamadexDao);
-        }, 31000); // 31 seconds
+        }, 6000); // 6 seconds
 
         //Check what type of tamagotchi hatched
         new Handler(getMainLooper()).postDelayed(() -> {
@@ -151,7 +151,7 @@ public class MainFragment extends Fragment {
             } else if (health.getName().equals("Zuccitchi")) {
                 zuccitchiIdleAnimation(view, binding);
             }
-        }, 31000); //31 seconds
+        }, 6000); // 6 seconds
     }
 
     /**

@@ -74,8 +74,8 @@ public class HomeActivity extends AppCompatActivity {
 
         //If tamagotchi hasn't hatched yet
         if (health.getName().equals("Egg")) {
-            //Timer for egg to hatch (30 sec)
-            CountDownTimer eggHatchingTimer = new CountDownTimer(30000,1000) {
+            //Timer for egg to hatch (5 sec)
+            CountDownTimer eggHatchingTimer = new CountDownTimer(5000,1000) {
                 @Override
                 public void onTick ( long millisUntilFinished){
                     //Declare variables
@@ -95,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
             //Make icons black
             new Handler(getMainLooper()).postDelayed(() -> {
                 binding.ivHealth.setImageResource(R.drawable.health_icon_black);
-            }, 31000); // 31 second
+            }, 6000); // 6 second
 
         //If tamagotchi is has already hatched
         } else {
