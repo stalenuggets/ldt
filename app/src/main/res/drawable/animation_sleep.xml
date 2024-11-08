@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--Animation List for Egg Idle Animation-->
+<!--Animation List for Sleep Animation-->
 
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:oneshot="false">
 
-    <!--Item: Egg 1-->
+    <!--Item: Sleep 1-->
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg1">
+        android:drawable="@drawable/sleep1">
     </item>
 
 
-    <!--Item: Egg 2-->
+    <!--Item: Sleep 2-->
 
     <item
         android:duration="1000"
-        android:drawable="@drawable/egg2">
+        android:drawable="@drawable/sleep2">
     </item>
 
 </animation-list>

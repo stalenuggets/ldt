@@ -14,30 +14,43 @@
         android:background="@drawable/screen_middle"
         tools:context=".activities.HomeActivity">
 
-        <!--Image View for Middle Screen-->
+        <!--Image View for Middle Screen (egg idle)-->
 
         <ImageView
             android:id="@+id/iv_middle_screen"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="12dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
-        <!--Image View for Middle Screen 2-->
+        <!--Image View for Middle Screen 2 (tama idle)-->
 
         <ImageView
             android:id="@+id/iv_middle_screen2"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
-        <!--Image View for Egg-->
+        <!--Image View for Middle Screen (sleep idle)-->
+
+        <ImageView
+            android:id="@+id/iv_middle_screen3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <!--Image View for Egg (egg hatched)-->
 
         <ImageView
             android:id="@+id/iv_egg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="9dp"
             android:visibility="invisible"
             android:layout_alignParentBottom="true"
             android:src="@drawable/egg_hatched" />

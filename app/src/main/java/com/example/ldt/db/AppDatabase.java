@@ -1,5 +1,7 @@
 package com.example.ldt.db;
 
+import android.content.Context;
+import androidx.room.Room;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
@@ -22,4 +24,20 @@ public abstract class AppDatabase extends RoomDatabase {
     //Abstract methods for DAO
     public abstract TamadexDao tamadexDao();
     public abstract UserDao userDao();
+
+    private static volatile AppDatabase INSTANCE;
+
+    // Singleton pattern to ensure only one instance of the database is created
+    public static AppDatabase getInstance(Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDatabase.class, DB_NAME)
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 }

@@ -1,7 +1,5 @@
 package com.example.ldt.activities;
 
-import static android.os.Looper.getMainLooper;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -12,7 +10,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +27,7 @@ import com.example.ldt.db.AppDatabase;
 import com.example.ldt.db.Health;
 import com.example.ldt.db.UserDao;
 import com.example.ldt.fragments.HealthFragment;
+import com.example.ldt.fragments.LightsFragment;
 import com.example.ldt.fragments.MainFragment;
 
 /**
@@ -72,10 +70,10 @@ public class HomeActivity extends AppCompatActivity {
         int id = userDao.findByUsername(usr).getUid();
         Health health = userDao.findByUid(id);
 
-        //If tamagotchi hasn't hatched yet
+        // If tamagotchi hasn't hatched yet
         if (health.getName().equals("Egg")) {
-            //Timer for egg to hatch (30 sec)
-            CountDownTimer eggHatchingTimer = new CountDownTimer(30000,1000) {
+            // Timer for egg to hatch (5 sec)
+            CountDownTimer eggHatchingTimer = new CountDownTimer(5000,1000) {
                 @Override
                 public void onTick ( long millisUntilFinished){
                     //Declare variables
@@ -88,21 +86,23 @@ public class HomeActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish () {
-                    //Make timer disappear
+                    // Make timer disappear
                     binding.eggHatchingTimer.setVisibility(View.INVISIBLE);
                 }
             }.start();
-            //Make icons black
+            // Make icons black
             new Handler(getMainLooper()).postDelayed(() -> {
                 binding.ivHealth.setImageResource(R.drawable.health_icon_black);
-            }, 31000); // 31 second
+                binding.ivLights.setImageResource(R.drawable.lights_icon_black);
+            }, 6000); // 6 second
 
-        //If tamagotchi is has already hatched
+        // If tamagotchi has already hatched
         } else {
             binding.ivHealth.setImageResource(R.drawable.health_icon_black);
+            binding.ivLights.setImageResource(R.drawable.lights_icon_black);
         }
 
-        //Click - Back button
+        // Click - Back button
         binding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //Click - Health icon
+        // Click - Health icon
         binding.ivHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,20 +132,20 @@ public class HomeActivity extends AppCompatActivity {
                 UserDao userDao2 = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, AppDatabase.DB_NAME)
                         .allowMainThreadQueries().build().userDao();
 
-                //Find health entry corresponding to current user
+                // Find health entry corresponding to current user
                 int id2 = userDao2.findByUsername(usr).getUid();
                 Health health2 = userDao2.findByUid(id2);
 
-                //If tamagotchi has hatched
+                // If tamagotchi has hatched
                 if (!health2.getName().equals("Egg")) {
 
-                    //If first click go to health screen
+                    // If first click go to health screen
                     if (firstClick) {
                         firstClick = false;
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, HealthFragment.class, null)
                                 .addToBackStack(null).commit();
-                        //If 2nd click exit health screen
+                        // If 2nd click exit health screen
                     } else {
                         firstClick = true;
                         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -155,6 +155,25 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Click - Lights icon
+        binding.ivLights.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (firstClick) {
+                    firstClick = false;
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, LightsFragment.class, null)
+                            .addToBackStack(null).commit();
+                } else {
+                    firstClick = true;
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContainerView, MainFragment.class, null)
+                            .addToBackStack(null).commit();
+                }
+            }
+        });
+
 
     } //End onCreate
 

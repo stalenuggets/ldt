@@ -5,7 +5,7 @@
     android:layout_width="350dp"
     android:layout_height="203dp">
 
-    <!--Relative Layout is used-->
+    <!--Linear Layout is used-->
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
