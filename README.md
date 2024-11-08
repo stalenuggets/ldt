@@ -22,7 +22,7 @@ Required Use Cases:
 
 Additional Use Cases (Mostly based on [User Manual](assets/instructions.png)):
 - [ ] Feed
-- [ ] Lights
+- [X] Lights
 - [ ] Game
 - [ ] Sick/Care
 - [ ] Bathroom
