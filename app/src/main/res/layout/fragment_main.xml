@@ -34,6 +34,15 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
+        <!--Image View for Middle Screen (sleep idle)-->
+
+        <ImageView
+            android:id="@+id/iv_middle_screen3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
         <!--Image View for Egg (egg hatched)-->
 
         <ImageView

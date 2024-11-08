@@ -2,6 +2,7 @@ package com.example.ldt.fragments;
 
 import static android.os.Looper.getMainLooper;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -96,6 +97,20 @@ public class MainFragment extends Fragment {
         int id = userDao.findByUsername(usr).getUid();
         Health health = userDao.findByUid(id);
 
+        // Access SharedPreferences to determine light state
+        sharedPref = getActivity().getSharedPreferences("LightPrefs", Context.MODE_PRIVATE);
+        boolean isLightsOn = sharedPref.getBoolean("isLightsOn", true);
+
+        // Lights?
+        if (!isLightsOn) { // Lights off
+            // Make sure to hide the idle animation views
+            binding.ivMiddleScreen2.setVisibility(View.INVISIBLE);
+            playSleepAnimation(view, binding);
+        } else {
+            // If lights are on, hide the sleep animation view
+            binding.ivMiddleScreen3.setVisibility(View.INVISIBLE);
+        }
+
         //Play idle animation for corresponding tamagotchi
         if (health.getName().equals("Egg")) {
             eggIdleAnimation(view, binding, health, userDao, tamadexDao);
@@ -155,7 +170,20 @@ public class MainFragment extends Fragment {
     }
 
     /**
-     * Plau tarakotchi idle animation
+     * Play sleep idle animation
+     * @param view
+     * @param binding
+     */
+    private void playSleepAnimation(View view, FragmentMainBinding binding) {
+        // Set the ImageView resource to the animation drawable
+        binding.ivMiddleScreen3.setImageResource(R.drawable.animation_sleep);
+        AnimationDrawable sleepAnimation = (AnimationDrawable) binding.ivMiddleScreen3.getDrawable();
+        sleepAnimation.start();
+    }
+
+
+    /**
+     * Play tarakotchi idle animation
      * @param view
      * @param binding
      */
@@ -189,6 +217,7 @@ public class MainFragment extends Fragment {
         AnimationDrawable zuccitchiIdleAnimation = (AnimationDrawable) binding.ivMiddleScreen2.getDrawable();
         zuccitchiIdleAnimation.start();
     }
+
 
     /**
      * Sets the tamagotchi type after it hatches (based on rarity)
